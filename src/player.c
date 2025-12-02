@@ -18,7 +18,7 @@ void	init_player(t_player *player, double x, double y, double angle)
 	player->pos.y = y;
 	player->direction = angle;
 	player->fov = 60;
-	player->plane_dist = 30;
+	player->plane_dist = 20;
 	player->key_up = false;
 	player->key_down = false;
 	player->key_left = false;
@@ -86,8 +86,8 @@ void	move_player(t_player *player)
 			if (spd < 0)
 				angle_add = -angle_add;
 		}
-		player->pos.x += cos(deg2rad(player->direction - angle_add)) * spd;
-		player->pos.y += sin(deg2rad(player->direction - angle_add)) * spd;
+		player->pos.x += dcos(player->direction - angle_add) * spd;
+		player->pos.y += dsin(player->direction - angle_add) * spd;
 	}
 }
 

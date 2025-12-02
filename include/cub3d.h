@@ -84,7 +84,14 @@ typedef struct s_game
 	int			endian;
 
 	t_player	player;
+
+	char		**map;
+	int			map_width;
+	int			map_height;
 }	t_game;
+
+bool	init_map(t_game *data);
+void	wipeout_map(t_game *data);
 
 void	init_player(t_player *player, double x, double y, double angle);
 int		key_press(int key, t_player *player);
@@ -97,8 +104,14 @@ void	draw_rectangle(t_game *data, t_rectangle rect, int color);
 void	draw_line(t_game *data, t_vector vct1, t_vector vct2, int color);
 
 double	deg2rad(double angle);
+double	dsin(double angle);
+double	dcos(double angle);
+double	dtan(double angle);
 double	point_angle(double x1, double y1, double x2, double y2);
 double	point_dist(double x1, double y1, double x2, double y2);
+double	vect_angle(t_vector vct1, t_vector vct2);
+double	vect_dist(t_vector vct1, t_vector vct2);
+void	vect_add(t_vector *dest, t_vector src, double angle, double dist);
 
 int		loop_event(t_game *data);
 

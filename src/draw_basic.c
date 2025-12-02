@@ -53,6 +53,6 @@ void	draw_line(t_game *data, t_vector vct1, t_vector vct2, int color)
 		draw_pixel(data, i, j, color);
 		i += cos(vect_ang);
 		j += sin(vect_ang);
-		vect_dist--;
+		vect_dist -= 1;
 	}
 }
