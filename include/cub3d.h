@@ -6,7 +6,7 @@
 /*   By: fmotte <fmotte@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 10:51:40 by cpollock          #+#    #+#             */
-/*   Updated: 2025/12/02 14:19:02 by fmotte           ###   ########.fr       */
+/*   Updated: 2025/12/02 16:47:58 by fmotte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <fcntl.h>
 # include <X11/X.h>
 # include <X11/keysym.h>
+# include "get_next_line.h"
 
 /*==================================*/
 /*==============MACRO===============*/
@@ -99,6 +100,30 @@ typedef struct s_game
 /*==================================*/
 /*============FONCTOIN==============*/
 /*==================================*/
+
+/*===================*/
+/*=====Mini_Libf=====*/
+/*===================*/
+/*Mini_Libf*/
+int	ft_isdigit(int c);
+int	ft_isnum(char *string);
+int	ft_strncmp(const char *s1, const char *s2, size_t n);
+int	ft_atoi(const char *str);
+char	*ft_strdup(const char *src);
+
+/*Ft_Realloc*/
+char	**ft_realloc(char **tab, char *string);
+
+/*Tab_utils*/
+void	tab_char_clear(char **tab);
+int		lenght_tab(char **tab);
+
+/*===================*/
+/*======Parsing======*/
+/*===================*/
+/*Parsing*/
+int check_expand(char *name_map);
+void open_map(char *name_map);
 
 /*===================*/
 /*=======MAP=========*/

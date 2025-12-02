@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   loop_event.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpollock <cpollock@42.fr>                  +#+  +:+       +#+        */
+/*   By: fmotte <fmotte@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 15:29:25 by cpollock          #+#    #+#             */
-/*   Updated: 2025/11/28 15:29:40 by cpollock         ###   ########.fr       */
+/*   Updated: 2025/12/02 15:20:31 by fmotte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3d.h"
+#include "cub3d.h"
 
 static void	draw_grid(t_game *data);
 static void	raycast_test(t_game *data, t_vector plane_l, t_vector plane_r, int color);

@@ -1,33 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dtrig.c                                            :+:      :+:    :+:   */
+/*   tab_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fmotte <fmotte@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/02 11:01:27 by cpollock          #+#    #+#             */
-/*   Updated: 2025/12/02 15:20:18 by fmotte           ###   ########.fr       */
+/*   Created: 2025/12/02 16:45:31 by fmotte            #+#    #+#             */
+/*   Updated: 2025/12/02 17:51:10 by fmotte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-double	deg2rad(double angle)
+void	tab_char_clear(char **tab)
 {
-	return (fmod(angle * (PI / 180), PI * 2));
+	int	i;
+
+	i = 0;
+	if (tab == NULL)
+		return ;
+	while (tab[i] != NULL)
+	{
+		free(tab[i]);
+		tab[i] = NULL;
+		i++;
+	}
+	free(tab);
+	tab = NULL;
 }
 
-double	dsin(double angle)
+int	lenght_tab(char **tab)
 {
-	return(sin(deg2rad(angle)));
-}
+	int	nb_elem;
 
-double	dcos(double angle)
-{
-	return(cos(deg2rad(angle)));
-}
-
-double	dtan(double angle)
-{
-	return(tan(deg2rad(angle)));
+    nb_elem = 0;
+	while (tab[nb_elem] != NULL)
+		nb_elem++;
+	nb_elem++;
+	return (nb_elem);
 }
