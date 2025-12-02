@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpollock <cpollock@42.fr>                  +#+  +:+       +#+        */
+/*   By: fmotte <fmotte@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 10:51:40 by cpollock          #+#    #+#             */
-/*   Updated: 2025/11/28 10:52:56 by cpollock         ###   ########.fr       */
+/*   Updated: 2025/12/02 14:19:02 by fmotte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,9 @@
 # include <X11/X.h>
 # include <X11/keysym.h>
 
+/*==================================*/
+/*==============MACRO===============*/
+/*==================================*/
 # define PI	3.14159265358979323846
 
 # define GAMENAME	"CUB3D"
@@ -40,6 +43,9 @@
 # define RIGHT	65363
 # define SPACE	32
 
+/*==================================*/
+/*==============STRUCUT=============*/
+/*==================================*/
 typedef struct s_vector
 {
 	double	x;
@@ -90,29 +96,62 @@ typedef struct s_game
 	int			map_height;
 }	t_game;
 
+/*==================================*/
+/*============FONCTOIN==============*/
+/*==================================*/
+
+/*===================*/
+/*=======MAP=========*/
+/*===================*/
+
+/*Setup_Map*/
 bool	init_map(t_game *data);
 void	wipeout_map(t_game *data);
 
+/*===================*/
+/*======PLAYER=======*/
+/*===================*/
+
+/*Player*/
 void	init_player(t_player *player, double x, double y, double angle);
 int		key_press(int key, t_player *player);
 int		key_release(int key, t_player *player);
 void	move_player(t_player *player);
 void	turn_player(t_player *player);
 
+/*===================*/
+/*========DRAW=======*/
+/*===================*/
+
+/*Draw_Basic*/
 void	draw_pixel(t_game *data, int x, int y, int color);
 void	draw_rectangle(t_game *data, t_rectangle rect, int color);
 void	draw_line(t_game *data, t_vector vct1, t_vector vct2, int color);
 
+/*===================*/
+/*===MATHEMATIQUES===*/
+/*===================*/
+
+/*Dtrig*/
 double	deg2rad(double angle);
 double	dsin(double angle);
 double	dcos(double angle);
 double	dtan(double angle);
+
+/*Point_Math*/
 double	point_angle(double x1, double y1, double x2, double y2);
 double	point_dist(double x1, double y1, double x2, double y2);
 double	vect_angle(t_vector vct1, t_vector vct2);
 double	vect_dist(t_vector vct1, t_vector vct2);
+
+/*Vect_Math*/
 void	vect_add(t_vector *dest, t_vector src, double angle, double dist);
 
+/*===================*/
+/*=======EVENT=======*/
+/*===================*/
+
+/*Loop_Event*/
 int		loop_event(t_game *data);
 
 #endif
