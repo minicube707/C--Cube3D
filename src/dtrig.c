@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   triangle_math.c                                    :+:      :+:    :+:   */
+/*   dtrig.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cpollock <cpollock@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/01 10:36:42 by cpollock          #+#    #+#             */
-/*   Updated: 2025/12/01 10:36:54 by cpollock         ###   ########.fr       */
+/*   Created: 2025/12/02 11:01:27 by cpollock          #+#    #+#             */
+/*   Updated: 2025/12/02 11:01:40 by cpollock         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,20 @@
 
 double	deg2rad(double angle)
 {
-	return (angle * (PI / 180));
+	return (fmod(angle * (PI / 180), PI * 2));
 }
 
-double	point_angle(double x1, double y1, double x2, double y2)
+double	dsin(double angle)
 {
-	return (atan2(y2 - y1, x2 - x1));
+	return(sin(deg2rad(angle)));
 }
 
-double	point_dist(double x1, double y1, double x2, double y2)
+double	dcos(double angle)
 {
-	return (hypot(x2 - x1, y2 - y1));
+	return(cos(deg2rad(angle)));
+}
+
+double	dtan(double angle)
+{
+	return(tan(deg2rad(angle)));
 }

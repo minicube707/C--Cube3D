@@ -47,6 +47,8 @@ static bool	init_game(t_game *data)
 	data->win = mlx_new_window(data->mlx, W_WIDTH, W_HEIGHT, GAMENAME);
 	if (data->win == NULL)
 		return (free(data->mlx), false);
+	if (!init_map(data))
+		return (free(data->mlx), false);
 	return (true);
 }
 
@@ -56,6 +58,7 @@ static int	kill_game(t_game *data)
 	mlx_destroy_image(data->mlx, data->img);
 	mlx_destroy_display(data->mlx);
 	free(data->mlx);
+	wipeout_map(data);
 	exit(0);
 	return (0);
 }

@@ -17,9 +17,12 @@ CFLAGS = -Wall -Wextra -Werror
 
 SRCDIR = src/
 SOURCES = main.c \
+		  setup_map.c \
 		  player.c \
 		  draw_basic.c \
-		  triangle_math.c \
+		  dtrig.c \
+		  point_math.c \
+		  vect_math.c \
 		  loop_event.c
 
 OBJDIR = obj/
