@@ -6,7 +6,7 @@
 #    By: fmotte <fmotte@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/28 11:37:49 by cpollock          #+#    #+#              #
-#    Updated: 2025/12/02 16:49:23 by fmotte           ###   ########.fr        #
+#    Updated: 2025/12/03 16:21:12 by fmotte           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,6 +34,7 @@ FILE_NAMES = 	main \
 				parsing \
 				ft_realloc \
 				mini_libft \
+				mini_libft2 \
 				tab_utils
 
 # =======================================

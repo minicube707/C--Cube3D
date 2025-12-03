@@ -6,7 +6,7 @@
 /*   By: fmotte <fmotte@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 16:45:31 by fmotte            #+#    #+#             */
-/*   Updated: 2025/12/02 17:51:10 by fmotte           ###   ########.fr       */
+/*   Updated: 2025/12/03 16:15:54 by fmotte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ int	lenght_tab(char **tab)
 {
 	int	nb_elem;
 
+	if (tab == NULL)
+		return (0);
     nb_elem = 0;
 	while (tab[nb_elem] != NULL)
 		nb_elem++;

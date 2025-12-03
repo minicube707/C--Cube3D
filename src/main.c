@@ -6,7 +6,7 @@
 /*   By: fmotte <fmotte@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 11:12:30 by cpollock          #+#    #+#             */
-/*   Updated: 2025/12/02 17:38:37 by fmotte           ###   ########.fr       */
+/*   Updated: 2025/12/03 16:10:21 by fmotte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,7 @@ int	main(int argc, char **argv)
 		printf("Wrong number of argument\n");
 		return (1);
 	}
-	if (check_expand(argv[1]))
-		return (1);
-	open_map(argv[1]);
+	parsing(argv[1]);
 	return (0);
 	
 	if (!init_game(&data))

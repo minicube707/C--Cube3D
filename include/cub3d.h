@@ -6,7 +6,7 @@
 /*   By: fmotte <fmotte@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 10:51:40 by cpollock          #+#    #+#             */
-/*   Updated: 2025/12/02 16:47:58 by fmotte           ###   ########.fr       */
+/*   Updated: 2025/12/03 16:41:02 by fmotte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,10 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n);
 int	ft_atoi(const char *str);
 char	*ft_strdup(const char *src);
 
+/*Mini_Libf2*/
+char 	*skip_white_space(char *string);
+char	*ft_substr(char const *s, unsigned int start, size_t len);
+
 /*Ft_Realloc*/
 char	**ft_realloc(char **tab, char *string);
 
@@ -122,8 +126,7 @@ int		lenght_tab(char **tab);
 /*======Parsing======*/
 /*===================*/
 /*Parsing*/
-int check_expand(char *name_map);
-void open_map(char *name_map);
+int parsing(char *name_map);
 
 /*===================*/
 /*=======MAP=========*/
