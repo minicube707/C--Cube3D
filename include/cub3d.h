@@ -29,10 +29,10 @@
 # define PI	3.14159265358979323846
 
 # define GAMENAME	"CUB3D"
-# define W_WIDTH	1920
-# define W_HEIGHT	1080
+# define W_WIDTH	1024
+# define W_HEIGHT	768
 
-# define TILE_LEN	100
+# define TILE_LEN	64
 
 # define ESC	65307
 # define W		119
@@ -44,7 +44,7 @@
 # define SPACE	32
 
 /*==================================*/
-/*==============STRUCUT=============*/
+/*==============STRUCTS=============*/
 /*==================================*/
 typedef struct s_vector
 {
@@ -65,7 +65,6 @@ typedef struct s_player
 	t_vector	pos;
 	double		direction;
 	double		fov;
-	double		plane_dist;
 
 	bool		key_up;
 	bool		key_down;
@@ -97,7 +96,7 @@ typedef struct s_game
 }	t_game;
 
 /*==================================*/
-/*============FONCTOIN==============*/
+/*============FONCTIONS=============*/
 /*==================================*/
 
 /*===================*/
@@ -114,8 +113,6 @@ void	wipeout_map(t_game *data);
 
 /*Player*/
 void	init_player(t_player *player, double x, double y, double angle);
-int		key_press(int key, t_player *player);
-int		key_release(int key, t_player *player);
 void	move_player(t_player *player);
 void	turn_player(t_player *player);
 
@@ -132,8 +129,11 @@ void	draw_line(t_game *data, t_vector vct1, t_vector vct2, int color);
 /*===MATHEMATIQUES===*/
 /*===================*/
 
-/*Dtrig*/
+/*Angle_Math*/
 double	deg2rad(double angle);
+double	angle_limit(double angle);
+
+/*Dtrig*/
 double	dsin(double angle);
 double	dcos(double angle);
 double	dtan(double angle);
@@ -147,9 +147,24 @@ double	vect_dist(t_vector vct1, t_vector vct2);
 /*Vect_Math*/
 void	vect_add(t_vector *dest, t_vector src, double angle, double dist);
 
+/*========================*/
+/*=======RAYCASTING=======*/
+/*========================*/
+
+/*Raycast*/
+int		raycast(t_game *data, t_vector *ray_vect, double angle);
+
+/*Collision*/
+bool	vect_in_wall(t_game *data, t_vector point);
+
 /*===================*/
 /*=======EVENT=======*/
 /*===================*/
+
+/*Key Events*/
+int		key_press(int key, t_game *data);
+int		key_release(int key, t_game *data);
+int		kill_game(t_game *data);
 
 /*Loop_Event*/
 int		loop_event(t_game *data);

@@ -18,57 +18,22 @@ void	init_player(t_player *player, double x, double y, double angle)
 	player->pos.y = y;
 	player->direction = angle;
 	player->fov = 60;
-	player->plane_dist = 20;
 	player->key_up = false;
 	player->key_down = false;
 	player->key_left = false;
 	player->key_right = false;
 	player->key_turn_l = false;
 	player->key_turn_r = false;
-	player->box_width = 50;
-	player->walk_spd = 0.5;
-	player->turn_spd = 0.5;
-}
-
-int	key_press(int key, t_player *player)
-{
-	if (key == W)
-		player->key_up = true;
-	if (key == S)
-		player->key_down = true;
-	if (key == A)
-		player->key_left = true;
-	if (key == D)
-		player->key_right = true;
-	if (key == LEFT)
-		player->key_turn_l = true;
-	if (key == RIGHT)
-		player->key_turn_r = true;
-	return (0);
-}
-
-int	key_release(int key, t_player *player)
-{
-	if (key == W)
-		player->key_up = false;
-	if (key == S)
-		player->key_down = false;
-	if (key == A)
-		player->key_left = false;
-	if (key == D)
-		player->key_right = false;
-	if (key == LEFT)
-		player->key_turn_l = false;
-	if (key == RIGHT)
-		player->key_turn_r = false;
-	return (0);
+	player->box_width = TILE_LEN / 2;
+	player->walk_spd = 0.25;
+	player->turn_spd = 0.25;
 }
 
 void	move_player(t_player *player)
 {
 	double	spd;
 	double	angle_add;
-	
+
 	if ((player->key_up ^ player->key_down)
 		|| (player->key_left ^ player->key_right))
 	{
@@ -100,6 +65,6 @@ void	turn_player(t_player *player)
 		trn = player->turn_spd;
 		if (player->key_turn_l)
 			trn = -trn;
-		player->direction = fmod(player->direction + trn, 360);
+		player->direction = angle_limit(player->direction + trn);
 	}
 }

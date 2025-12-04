@@ -15,14 +15,18 @@ NAME = cub3d
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 
-FILE_NAMES = 	main \
-		  		setup_map \
-		  		player \
-		  		draw_basic \
-		  		dtrig \
-		  		point_math \
-		  		vect_math \
-		  		loop_event
+FILE_NAMES =	main \
+				setup_map \
+				key_events \
+				player \
+				draw_basic \
+				dtrig \
+				angle_math \
+				point_math \
+				vect_math \
+				collision_check \
+				loop_event \
+				raycast
 
 SRC_PATH = src
 OBJ_PATH = obj
