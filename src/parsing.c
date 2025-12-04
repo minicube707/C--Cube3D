@@ -6,7 +6,7 @@
 /*   By: fmotte <fmotte@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 14:58:28 by fmotte            #+#    #+#             */
-/*   Updated: 2025/12/03 17:47:15 by fmotte           ###   ########.fr       */
+/*   Updated: 2025/12/04 18:03:16 by fmotte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ void print_info(char **tab_map, char **tab_tex, char **tab_col)
         printf("%s", tab_tex[i]);
         i++;
     }
-    tab_char_clear(tab_tex);
     
     i = 0;
     printf("\nColour\n");
@@ -30,7 +29,6 @@ void print_info(char **tab_map, char **tab_tex, char **tab_col)
         printf("%s", tab_col[i]);
         i++;
     }
-    tab_char_clear(tab_col);
     
     i = 0;
     printf("\nMAP\n");
@@ -39,11 +37,20 @@ void print_info(char **tab_map, char **tab_tex, char **tab_col)
         printf("%s", tab_map[i]);
         i++;
     }
-    tab_char_clear(tab_map); 
     printf("OK\n");
 }
 
-int check_expand(char *name_map, char *extention)
+void clear_parsing(char **tab_map, char **tab_tex, char **tab_col)
+{
+    if (tab_map != NULL)
+        tab_char_clear(tab_map);
+    if (tab_tex != NULL)
+        tab_char_clear(tab_tex);
+    if (tab_col != NULL)
+        tab_char_clear(tab_col);
+}
+
+int check_extension(char *name_map, char *extention)
 {
     int len_map;
     int len_ext;
@@ -64,20 +71,14 @@ int check_expand(char *name_map, char *extention)
     return (1);
 }
 
-static int fill_texture(char *string, char ***tab_tex)
-{
-    string = skip_white_space(string);
-    *tab_tex = ft_realloc(*tab_tex, string);
-    return (0);
-}
-static int fill_colour(char *string, char ***tab_col)
+static int fill_colour_texture(char *string, char ***tab_col)
 {
     string = skip_white_space(string);
     *tab_col = ft_realloc(*tab_col, string);
     return (0);
 }
 
-static int fill_informatoin(char *string, char ***tab_tex, char ***tab_col)
+static int fill_information(char *string, char ***tab_tex, char ***tab_col)
 {
     char *tmp;
     
@@ -88,22 +89,63 @@ static int fill_informatoin(char *string, char ***tab_tex, char ***tab_col)
         return (0);
     }
     if (ft_strncmp(tmp, "NO", 2) == 0)
-        return (fill_texture(tmp, tab_tex));
+        return (fill_colour_texture(tmp, tab_tex));
     else if (ft_strncmp(tmp, "SO", 2)  == 0)
-        return (fill_texture(tmp, tab_tex));
+        return (fill_colour_texture(tmp, tab_tex));
     else if (ft_strncmp(tmp, "WE", 2)  == 0)
-        return (fill_texture(tmp, tab_tex));
+        return (fill_colour_texture(tmp, tab_tex));
     else if (ft_strncmp(tmp, "EA", 2)  == 0)
-        return (fill_texture(tmp, tab_tex));
+        return (fill_colour_texture(tmp, tab_tex));
     else if (ft_strncmp(tmp, "F", 1)  == 0)
-        return (fill_colour(tmp, tab_col));
+        return (fill_colour_texture(tmp, tab_col));
     else if (ft_strncmp(tmp, "C", 1)  == 0)
-        return (fill_colour(tmp, tab_col));
+        return (fill_colour_texture(tmp, tab_col));
     else  
     {
         free(tmp);
         return (0);
     }  
+}
+
+int check_map_char(char **tab_map)
+{
+    int i;
+    int j;
+    int k;
+    char *allow_string = "01NSEW\n ";
+    
+    i = 0;
+    while (tab_map[i] != NULL)
+    {
+        j = 0;
+        while (tab_map[i][j] !='\0')
+        {
+            k = 0;
+            while(allow_string[k] != '\0' && tab_map[i][j] != allow_string[k])
+                k++;
+            if (allow_string[k] =='\0')
+                return (1);
+            j++;
+        }
+        i++;
+    }
+    return (0);
+}
+
+int check_map(char **tab_map)   
+{
+    if(check_map_char(tab_map))
+        return (1);
+    return (0);
+}
+
+int check_data(char **tab_map, char **tab_tex, char **tab_col)
+{
+    if (tab_map == NULL || tab_tex == NULL || tab_col == NULL)
+        return (1);
+    if (check_map(tab_map))
+        return (1);
+    return (0);
 }
 
 int open_map(char *name_map)
@@ -135,19 +177,17 @@ int open_map(char *name_map)
     return (-1);
 }
 
-int check_info(char **tab_map, char **tab_tex, char **tab_col)
-{
-    if (tab_map == NULL || tab_tex == NULL || tab_col == NULL)
-        return (1);  
-    return (0);
-}
-
 void manage_data(int fd)
 {
+    /*TMP*/
     char *string;
     char **tab_map =  NULL;
     char **tab_tex =  NULL;
     char **tab_col =  NULL;
+    
+    /*SRUCT*/
+    //unsigned int hex_colour = 0;
+    //unsigned int hex_texture = 0;
     
     string = "";
     while (string != NULL)
@@ -156,24 +196,23 @@ void manage_data(int fd)
         if (string != NULL && lenght_tab(tab_col) == 3 && lenght_tab(tab_tex) == 5)
             tab_map = ft_realloc(tab_map, string);
         else if (string != NULL)
-            fill_informatoin(string, &tab_tex, &tab_col);
+            fill_information(string, &tab_tex, &tab_col);
+        //check if fill info fail ou realloc
     }
-    if (!check_info(tab_map, tab_tex, tab_col))
-        print_info(tab_map, tab_tex, tab_col);
-    else
+    if (check_data(tab_map, tab_tex, tab_col))
     {
-        tab_char_clear(tab_map);
-        tab_char_clear(tab_tex);
-        tab_char_clear(tab_col);
-        printf("KO\n");
+        printf("KO\n"); 
+        return (clear_parsing(tab_map, tab_tex, tab_col));
     }
+    print_info(tab_map, tab_tex, tab_col);      
+    return (clear_parsing(tab_map, tab_tex, tab_col));
 }
 
 int parsing(char *name_map)
 {
     int fd;
     
-    if (check_expand(name_map, ".cub"))
+    if (check_extension(name_map, ".cub"))
 		return (1);
 	fd = open_map(name_map);
     if (fd == -1)
