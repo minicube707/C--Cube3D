@@ -30,6 +30,25 @@ bool	init_map(t_game *data)
 			return (wipeout_map(data), false);
 	}
 	(data->map)[i] = NULL;
+	strcpy((data->map)[0], "1111111111");
+	strcpy((data->map)[1], "1000001001");
+	strcpy((data->map)[2], "1000001001");
+	strcpy((data->map)[3], "1000000000");
+	strcpy((data->map)[4], "1011000000");
+	strcpy((data->map)[5], "1000000001");
+	strcpy((data->map)[6], "1000001001");
+	strcpy((data->map)[7], "1000000001");
+	strcpy((data->map)[8], "1000000001");
+	strcpy((data->map)[9], "1000000001");
+	strcpy((data->map)[10], "1000000001");
+	strcpy((data->map)[11], "1000001001");
+	strcpy((data->map)[12], "1000000101");
+	strcpy((data->map)[13], "0000000101");
+	strcpy((data->map)[14], "0000001101");
+	strcpy((data->map)[15], "1000000001");
+	strcpy((data->map)[16], "1110000001");
+	strcpy((data->map)[17], "1110000001");
+	strcpy((data->map)[18], "1110111111");
 	return (true);
 }
 

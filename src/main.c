@@ -13,8 +13,6 @@
 #include "../include/cub3d.h"
 
 static bool	init_game(t_game *data);
-static int	kill_game(t_game *data);
-static int	esc_game(int key, t_game *data);
 
 int	main(int arg_c, char *arg_s[])
 {
@@ -26,9 +24,8 @@ int	main(int arg_c, char *arg_s[])
 		return (1);
 	init_player(&data.player, W_WIDTH / 2, W_HEIGHT / 2, 270);
 	mlx_hook(data.win, DestroyNotify, StructureNotifyMask, &kill_game, &data);
-	mlx_hook(data.win, KeyRelease, KeyReleaseMask, &esc_game, &data);
-	mlx_hook(data.win, KeyPress, KeyPressMask, &key_press, &data.player);
-	mlx_hook(data.win, KeyRelease, KeyReleaseMask, &key_release, &data.player);
+	mlx_hook(data.win, KeyPress, KeyPressMask, &key_press, &data);
+	mlx_hook(data.win, KeyRelease, KeyReleaseMask, &key_release, &data);
 	mlx_loop_hook(data.mlx, loop_event, &data);
 	mlx_loop(data.mlx);
 	return (0);
@@ -50,22 +47,4 @@ static bool	init_game(t_game *data)
 	if (!init_map(data))
 		return (free(data->mlx), false);
 	return (true);
-}
-
-static int	kill_game(t_game *data)
-{
-	mlx_destroy_window(data->mlx, data->win);
-	mlx_destroy_image(data->mlx, data->img);
-	mlx_destroy_display(data->mlx);
-	free(data->mlx);
-	wipeout_map(data);
-	exit(0);
-	return (0);
-}
-
-static int	esc_game(int key, t_game *data)
-{
-	if (key == ESC)
-		kill_game(data);
-	return (0);
 }

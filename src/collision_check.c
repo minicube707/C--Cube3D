@@ -1,28 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dtrig.c                                            :+:      :+:    :+:   */
+/*   collision_check.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cpollock <cpollock@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/02 11:01:27 by cpollock          #+#    #+#             */
-/*   Updated: 2025/12/02 11:01:40 by cpollock         ###   ########.fr       */
+/*   Created: 2025/12/04 14:34:33 by cpollock          #+#    #+#             */
+/*   Updated: 2025/12/04 14:34:46 by cpollock         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-double	dsin(double angle)
+bool	vect_in_wall(t_game *data, t_vector point)
 {
-	return (sin(deg2rad(angle)));
-}
+	int	check_x;
+	int	check_y;
 
-double	dcos(double angle)
-{
-	return (cos(deg2rad(angle)));
-}
-
-double	dtan(double angle)
-{
-	return (tan(deg2rad(angle)));
+	check_x = (int)floor(point.x / TILE_LEN);
+	check_y = (int)floor(point.y / TILE_LEN);
+	if ((check_x < 0 || check_x >= data->map_width)
+		|| (check_y < 0 || check_y >= data->map_height)
+		|| (data->map)[check_x][check_y] == '1')
+		return (true);
+	return (false);
 }

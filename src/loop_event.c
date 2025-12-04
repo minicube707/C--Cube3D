@@ -12,94 +12,106 @@
 
 #include "../include/cub3d.h"
 
-static void	draw_grid(t_game *data);
-static void	raycast_test(t_game *data, t_vector plane_l, t_vector plane_r, int color);
+static void		raycast_test(t_game *data, int color);
+static double	fix_dist(double dist, double player_angle, double ray_angle);
+static void		wall_test(t_game *data);
 
 int	loop_event(t_game *data)
 {
 	t_rectangle	player_square;
 	t_vector	dir_vect;
-	t_vector	plane_l_vect;
-	t_vector	plane_r_vect;
 
-	draw_grid(data);
 	player_square.x = data->player.pos.x - (data->player.box_width / 2);
 	player_square.y = data->player.pos.y - (data->player.box_width / 2);
 	player_square.width = data->player.box_width;
 	player_square.height = data->player.box_width;
 	draw_rectangle(data, player_square, 0);
-	dir_vect.x = data->player.pos.x + dcos(data->player.direction) * data->player.plane_dist;
-	dir_vect.y = data->player.pos.y + dsin(data->player.direction) * data->player.plane_dist;
+	dir_vect.x = data->player.pos.x + dcos(data->player.direction) * 11;
+	dir_vect.y = data->player.pos.y + dsin(data->player.direction) * 11;
 	draw_line(data, data->player.pos, dir_vect, 0);
-	plane_l_vect.x = dir_vect.x - dcos(data->player.direction + 90) * dtan(data->player.fov / 2) * data->player.plane_dist;
-	plane_l_vect.y = dir_vect.y - dsin(data->player.direction + 90) * dtan(data->player.fov / 2) * data->player.plane_dist;
-	plane_r_vect.x = dir_vect.x + dcos(data->player.direction + 90) * dtan(data->player.fov / 2) * data->player.plane_dist;
-	plane_r_vect.y = dir_vect.y + dsin(data->player.direction + 90) * dtan(data->player.fov / 2) * data->player.plane_dist;
-	draw_line(data, plane_l_vect, plane_r_vect, 0);
-	raycast_test(data, plane_l_vect, plane_r_vect, 0);
+	raycast_test(data, 0);
 	turn_player(&data->player);
 	move_player(&data->player);
 	player_square.x = data->player.pos.x - (data->player.box_width / 2);
 	player_square.y = data->player.pos.y - (data->player.box_width / 2);
 	draw_rectangle(data, player_square, 0x00FF00);
-	dir_vect.x = data->player.pos.x + dcos(data->player.direction) * data->player.plane_dist;
-	dir_vect.y = data->player.pos.y + dsin(data->player.direction) * data->player.plane_dist;
+	dir_vect.x = data->player.pos.x + dcos(data->player.direction) * 11;
+	dir_vect.y = data->player.pos.y + dsin(data->player.direction) * 11;
 	draw_line(data, data->player.pos, dir_vect, 0x0000FF);
-	plane_l_vect.x = dir_vect.x - dcos(data->player.direction + 90) * dtan(data->player.fov / 2) * data->player.plane_dist;
-	plane_l_vect.y = dir_vect.y - dsin(data->player.direction + 90) * dtan(data->player.fov / 2) * data->player.plane_dist;
-	plane_r_vect.x = dir_vect.x + dcos(data->player.direction + 90) * dtan(data->player.fov / 2) * data->player.plane_dist;
-	plane_r_vect.y = dir_vect.y + dsin(data->player.direction + 90) * dtan(data->player.fov / 2) * data->player.plane_dist;
-	draw_line(data, plane_l_vect, plane_r_vect, 0x0000FF);
-	raycast_test(data, plane_l_vect, plane_r_vect, 0x0000FF);
+	wall_test(data);
+	raycast_test(data, 0x0000FF);
 	mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);
 	return (0);
 }
 
-static void	draw_grid(t_game *data)
+static void	raycast_test(t_game *data, int color)
 {
-	t_vector	vct1;
-	t_vector	vct2;
+	int			i;
+	int			wall_side;
+	double		ray_angle;
+	t_vector	ray_vect;
 
-	vct1.x = TILE_LEN;
-	vct2.x = vct1.x;
-	vct1.y = 0;
-	vct2.y = W_HEIGHT;
-	while (vct1.x < W_WIDTH)
+	i = 0;
+	ray_angle = data->player.direction - (data->player.fov / 2);
+	while (i < W_WIDTH)
 	{
-		draw_line(data, vct1, vct2, 0x002E10);
-		vct1.x += TILE_LEN;
-		vct2.x = vct1.x;
-	}
-	vct1.y = TILE_LEN;
-	vct2.y = vct1.y;
-	vct1.x = 0;
-	vct2.x = W_WIDTH;
-	while (vct1.y < W_HEIGHT)
-	{
-		draw_line(data, vct1, vct2, 0x002E10);
-		vct1.y += TILE_LEN;
-		vct2.y = vct1.y;
+		wall_side = raycast(data, &ray_vect, angle_limit(ray_angle));
+		if (color != 0)
+		{
+			if (wall_side == 1)
+				color = 0x0000FF;
+			if (wall_side == 2)
+				color = 0x000280;
+			if (wall_side == 3)
+				color = 0x0066FF;
+			if (wall_side == 4)
+				color = 0x0044AA;
+		}
+		double dist = vect_dist(data->player.pos, ray_vect);
+		dist = fix_dist(dist, data->player.direction, ray_angle);
+		double height = (TILE_LEN / dist) * (W_WIDTH);
+		double start_y = (W_HEIGHT - height) / 2;
+		double end = start_y + height;
+		while (start_y < end)
+		{
+			draw_pixel(data, i, start_y, color);
+			start_y += 1;
+		}
+		ray_angle += data->player.fov / W_WIDTH;
+		i++;
 	}
 }
 
-static void	raycast_test(t_game *data, t_vector plane_l, t_vector plane_r, int color)
+static double	fix_dist(double dist, double player_angle, double ray_angle)
 {
-	double		i;
-	double		ray_dist;
-	double		plane_dist;
-	double		plane_ang;
-	t_vector	ray_start;
-	t_vector	ray_end;
+	double	angle_diff;
+
+	angle_diff = angle_limit(player_angle - ray_angle);
+	return (dist * dcos(angle_diff));
+}
+
+static void	wall_test(t_game *data)
+{
+	int			i;
+	int			j;
+	t_rectangle	wall_rect;
 
 	i = 0;
-	ray_dist = 200;
-	plane_dist = vect_dist(plane_l, plane_r);
-	plane_ang = vect_angle(plane_l, plane_r);
-	while (i <= plane_dist)
+	wall_rect.width = TILE_LEN;
+	wall_rect.height = TILE_LEN;
+	while ((data->map)[i] != NULL)
 	{
-		vect_add(&ray_start, plane_l, plane_ang, i);
-		vect_add(&ray_end, data->player.pos, vect_angle(data->player.pos, ray_start), ray_dist);
-		draw_line(data, ray_start, ray_end, color);
-		i += plane_dist / W_WIDTH;
+		j = 0;
+		while ((data->map)[i][j] != '\0')
+		{
+			if ((data->map)[i][j] == '1')
+			{
+				wall_rect.x = i * TILE_LEN;
+				wall_rect.y = j * TILE_LEN;
+				draw_rectangle(data, wall_rect, 0x850000);
+			}
+			j++;
+		}
+		i++;
 	}
 }
