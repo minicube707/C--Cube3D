@@ -6,7 +6,7 @@
 #    By: fmotte <fmotte@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/28 11:37:49 by cpollock          #+#    #+#              #
-#    Updated: 2025/12/05 13:26:41 by fmotte           ###   ########.fr        #
+#    Updated: 2025/12/05 16:32:47 by fmotte           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,22 +23,23 @@ CFLAGS = -Wall -Wextra -Werror -MMD -MP -g
 # =======================================
 #              FILE
 # =======================================
-FILE_NAMES = 	main \
-		  		setup_map \
-		  		player \
-		  		draw_basic \
-		  		dtrig \
-		  		point_math \
-		  		vect_math \
-		  		loop_event \
-				parsing \
-				ft_realloc \
-				mini_libft \
-				mini_libft2 \
-				tab_utils \
+FILE_NAMES = 	check_colour \
 				check_map \
-				check_colour \
-				ft_split 
+				check_texture \
+				draw_basic \
+				dtrig \
+				ft_realloc \
+				ft_split \
+				loop_event \
+				main \
+				mini_libft2 \
+				mini_libft \
+				parsing \
+				player \
+				point_math \
+				setup_map \
+				tab_utils \
+				vect_math
 
 # =======================================
 #              VARIABLE

@@ -6,7 +6,7 @@
 /*   By: fmotte <fmotte@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/05 13:06:37 by fmotte            #+#    #+#             */
-/*   Updated: 2025/12/05 16:26:50 by fmotte           ###   ########.fr       */
+/*   Updated: 2025/12/05 17:48:00 by fmotte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,14 +57,31 @@ int check_colour(char **tab_col)
 {
     printf("FLOOR\n");
     if (tab_col[0][0] == 'F')
-        return (extract_colour(tab_col, 0));
-    else 
-        return (extract_colour(tab_col, 1));
+    {
+        printf("%s", tab_col[0]);
+        if (extract_colour(tab_col, 0))
+            return (1);
+    }
+    else
+    {
+        printf("%s", tab_col[1]);
+        if (extract_colour(tab_col, 1))
+            return (1);
+    }
     
     printf("CELLING\n");
-    if (tab_col[1][0] == 'C')
-        return (extract_colour(tab_col, 1));
+    if (tab_col[0][0] == 'C')
+    {
+        printf("%s", tab_col[0]);   
+        if (extract_colour(tab_col, 0))
+            return (1);
+    }
     else
-        return (extract_colour(tab_col, 0));
+    {
+        printf("%s", tab_col[1]);
+        if (extract_colour(tab_col, 1))
+            return (1);
+    }
     return (0);
 }
+

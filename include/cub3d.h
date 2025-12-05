@@ -6,7 +6,7 @@
 /*   By: fmotte <fmotte@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 10:51:40 by cpollock          #+#    #+#             */
-/*   Updated: 2025/12/05 13:21:57 by fmotte           ###   ########.fr       */
+/*   Updated: 2025/12/05 16:54:59 by fmotte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,11 +134,15 @@ int check_map(char **tab_map);
 /*Checking Colour*/
 int check_colour(char **tab_col);
 
+/*Checking Texture*/
+int chec_texture(char **tab_tex) ;
+
 /*===================*/
 /*======Parsing======*/
 /*===================*/
 /*Parsing*/
 int parsing(char *name_map);
+int check_extension(char *name_map, char *extention);
 
 /*===================*/
 /*=======MAP=========*/

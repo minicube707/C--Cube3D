@@ -6,21 +6,16 @@
 /*   By: fmotte <fmotte@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 14:58:28 by fmotte            #+#    #+#             */
-/*   Updated: 2025/12/05 16:10:25 by fmotte           ###   ########.fr       */
+/*   Updated: 2025/12/05 17:39:47 by fmotte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void print_info(char **tab_map, char **tab_tex)
+void print_info(char **tab_map)
 {
-    int i = 0;
-    printf("Texture\n");
-    while (tab_tex[i] != NULL)
-    {
-        printf("%s", tab_tex[i]);
-        i++;
-    }
+    int i;
+    
     i = 0;
     printf("\nMAP\n");
     while (tab_map[i] != NULL)
@@ -48,7 +43,7 @@ int check_extension(char *name_map, char *extention)
     int j;
     
     len_map = ft_strlen(name_map);
-    len_ext = 4;
+    len_ext = ft_strlen(extention);;
     j = 0;
     while(len_map - j > 0 && len_ext > j)
     {
@@ -56,16 +51,21 @@ int check_extension(char *name_map, char *extention)
             break;
         j++;
     }
-    if (name_map[len_map - j] == '.')
-        return(0);
+    if (name_map[len_map - j] == extention[0])
+        return(1);
     printf("Wrong extention. Can't open file %s\n", name_map);
-    return (1);
+    return (0);
 }
 
 static int fill_colour_texture(char *string, char ***tab_col)
 {
-    string = skip_white_space(string);
-    *tab_col = ft_realloc(*tab_col, string);
+    char *tmp;
+    
+    tmp  = skip_white_space(string);
+    free(string);
+    if (tmp == NULL)
+        return (1);
+    *tab_col = ft_realloc(*tab_col, tmp);
     return (0);
 }
 
@@ -74,6 +74,7 @@ static int fill_information(char *string, char ***tab_tex, char ***tab_col)
     char *tmp;
     
     tmp = skip_white_space(string);
+    free(string);
     if (tmp[0] == '\0')
     {
         free(tmp);
@@ -113,7 +114,12 @@ int check_data(char **tab_map, char **tab_tex, char **tab_col)
     {
         printf("KO Colour\n"); 
         return (1);
-    }  
+    } 
+    if (chec_texture(tab_tex))
+    {
+        printf("KO Texture\n"); 
+        return (1);
+    }
     return (0);
 }
 
@@ -166,7 +172,7 @@ void manage_data(int fd)
     }
     if (check_data(tab_map, tab_tex, tab_col))
         return (clear_parsing(tab_map, tab_tex, tab_col));
-    print_info(tab_map, tab_tex);      
+    print_info(tab_map);      
     return (clear_parsing(tab_map, tab_tex, tab_col));
 }
 
@@ -174,7 +180,7 @@ int parsing(char *name_map)
 {
     int fd;
     
-    if (check_extension(name_map, ".cub"))
+    if (!check_extension(name_map, ".cub"))
 		return (1);
 	fd = open_map(name_map);
     if (fd == -1)

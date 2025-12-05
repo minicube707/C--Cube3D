@@ -6,7 +6,7 @@
 /*   By: fmotte <fmotte@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/03 16:16:52 by fmotte            #+#    #+#             */
-/*   Updated: 2025/12/05 15:59:16 by fmotte           ###   ########.fr       */
+/*   Updated: 2025/12/05 17:02:04 by fmotte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ char *skip_white_space(char *string)
     while (string[i] != '\0' && !(32 < string[i] && string[i] <= 126))
         i++;
     res = ft_substr(string, i, ft_strlen(string));
-    free(string);
     return (res);
 }
 
