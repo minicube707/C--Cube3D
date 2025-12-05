@@ -6,7 +6,7 @@
 /*   By: fmotte <fmotte@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 16:28:11 by fmotte            #+#    #+#             */
-/*   Updated: 2025/12/02 17:44:40 by fmotte           ###   ########.fr       */
+/*   Updated: 2025/12/05 16:20:03 by fmotte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,17 @@ int	ft_isnum(char *string)
 	int	i;
 
 	i = 0;
-	while (string[i] != '\0' && (string[i] == '-' || string[i] == '+'))
+	while (string[i] != '\0' && (string[i] == '-' || string[i] == '+' || !(33 <= string[i] && string[i] <= 126)))
 		i++;
-	if (string[i] == '\0')
+	if (string[i] == '\0' || !ft_isdigit(string[i]))
+	{
 		return (0);
+	}
 	while (string[i] != '\0' && ft_isdigit(string[i]))
 		i++;
-	if (string[i] == '\0')
+	while (string[i] != '\0' && !(33 <= string[i] && string[i] <= 126))
+		i++;
+	if (string[i] == 0)
 		return (1);
 	return (0);
 }

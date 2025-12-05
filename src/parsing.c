@@ -6,13 +6,13 @@
 /*   By: fmotte <fmotte@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 14:58:28 by fmotte            #+#    #+#             */
-/*   Updated: 2025/12/04 18:03:16 by fmotte           ###   ########.fr       */
+/*   Updated: 2025/12/05 16:10:25 by fmotte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void print_info(char **tab_map, char **tab_tex, char **tab_col)
+void print_info(char **tab_map, char **tab_tex)
 {
     int i = 0;
     printf("Texture\n");
@@ -21,15 +21,6 @@ void print_info(char **tab_map, char **tab_tex, char **tab_col)
         printf("%s", tab_tex[i]);
         i++;
     }
-    
-    i = 0;
-    printf("\nColour\n");
-    while (tab_col[i] != NULL)
-    {
-        printf("%s", tab_col[i]);
-        i++;
-    }
-    
     i = 0;
     printf("\nMAP\n");
     while (tab_map[i] != NULL)
@@ -100,51 +91,29 @@ static int fill_information(char *string, char ***tab_tex, char ***tab_col)
         return (fill_colour_texture(tmp, tab_col));
     else if (ft_strncmp(tmp, "C", 1)  == 0)
         return (fill_colour_texture(tmp, tab_col));
-    else  
-    {
-        free(tmp);
-        return (0);
-    }  
+    free(tmp);
+    return (0);
+
 }
 
-int check_map_char(char **tab_map)
-{
-    int i;
-    int j;
-    int k;
-    char *allow_string = "01NSEW\n ";
-    
-    i = 0;
-    while (tab_map[i] != NULL)
-    {
-        j = 0;
-        while (tab_map[i][j] !='\0')
-        {
-            k = 0;
-            while(allow_string[k] != '\0' && tab_map[i][j] != allow_string[k])
-                k++;
-            if (allow_string[k] =='\0')
-                return (1);
-            j++;
-        }
-        i++;
-    }
-    return (0);
-}
-
-int check_map(char **tab_map)   
-{
-    if(check_map_char(tab_map))
-        return (1);
-    return (0);
-}
 
 int check_data(char **tab_map, char **tab_tex, char **tab_col)
 {
     if (tab_map == NULL || tab_tex == NULL || tab_col == NULL)
+    {
+        printf("KO Instruction\n"); 
         return (1);
+    }  
     if (check_map(tab_map))
+    {
+        printf("KO Map\n"); 
         return (1);
+    }  
+    if (check_colour(tab_col))
+    {
+        printf("KO Colour\n"); 
+        return (1);
+    }  
     return (0);
 }
 
@@ -185,10 +154,6 @@ void manage_data(int fd)
     char **tab_tex =  NULL;
     char **tab_col =  NULL;
     
-    /*SRUCT*/
-    //unsigned int hex_colour = 0;
-    //unsigned int hex_texture = 0;
-    
     string = "";
     while (string != NULL)
     {
@@ -200,11 +165,8 @@ void manage_data(int fd)
         //check if fill info fail ou realloc
     }
     if (check_data(tab_map, tab_tex, tab_col))
-    {
-        printf("KO\n"); 
         return (clear_parsing(tab_map, tab_tex, tab_col));
-    }
-    print_info(tab_map, tab_tex, tab_col);      
+    print_info(tab_map, tab_tex);      
     return (clear_parsing(tab_map, tab_tex, tab_col));
 }
 

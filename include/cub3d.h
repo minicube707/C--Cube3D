@@ -6,7 +6,7 @@
 /*   By: fmotte <fmotte@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 10:51:40 by cpollock          #+#    #+#             */
-/*   Updated: 2025/12/03 16:41:02 by fmotte           ###   ########.fr       */
+/*   Updated: 2025/12/05 13:21:57 by fmotte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,18 @@ char	**ft_realloc(char **tab, char *string);
 /*Tab_utils*/
 void	tab_char_clear(char **tab);
 int		lenght_tab(char **tab);
+
+/*Ft_Split*/
+char	**ft_split(char const *s, char c);
+
+/*===================*/
+/*======Checking=====*/
+/*===================*/
+/*Checking Map*/
+int check_map(char **tab_map);
+
+/*Checking Colour*/
+int check_colour(char **tab_col);
 
 /*===================*/
 /*======Parsing======*/
