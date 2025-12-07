@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fmotte <fmotte@student.42.fr>              +#+  +:+       +#+        */
+/*   By: florent <florent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 10:51:40 by cpollock          #+#    #+#             */
-/*   Updated: 2025/12/05 16:54:59 by fmotte           ###   ########.fr       */
+/*   Updated: 2025/12/07 01:01:19 by florent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,18 @@ typedef struct s_game
 	int			map_height;
 }	t_game;
 
+typedef struct s_coord
+{
+	int	x;
+	int	y;
+}	t_coord;
+
+typedef struct s_stack
+{
+	t_coord		*coord;
+	struct s_stack	*next;
+}					t_stack;
+
 /*==================================*/
 /*============FONCTOIN==============*/
 /*==================================*/
@@ -124,6 +136,15 @@ int		lenght_tab(char **tab);
 
 /*Ft_Split*/
 char	**ft_split(char const *s, char c);
+
+/*===================*/
+/*=======Stack=======*/
+/*===================*/
+t_stack		*new_stack(void);
+int			is_empty_stack(t_stack *st);
+t_stack		*push_stack(t_stack *st, int x, int y);
+t_stack		*clear_stack(t_stack *st);
+t_stack		*pop_stack(t_stack *st);
 
 /*===================*/
 /*======Checking=====*/
