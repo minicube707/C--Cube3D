@@ -6,7 +6,7 @@
 /*   By: fmotte <fmotte@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 10:51:40 by cpollock          #+#    #+#             */
-/*   Updated: 2025/12/08 15:18:44 by fmotte           ###   ########.fr       */
+/*   Updated: 2025/12/08 15:48:20 by fmotte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,21 +167,21 @@ t_stack				*pop_stack(t_stack *st);
 /*======Checking=====*/
 /*===================*/
 /*Checking Map*/
-int					check_map(char **tab_map);
+int					check_map(char **tab_map, t_game *data);
 t_coord				get_pos_player(char **tab_map);
 int					in(t_stack *stack_path, int x, int y);
 int					get_width_map(char **tab_map);
 t_stack				*parse_map(char **tab_map);
 
 /*Checking Map Path*/
-int					check_map_path(char **tab_map);
+int					check_map_path(char **tab_map, t_game *data);
 
 /*Checking Map Path2*/
 int					clear_map(t_stack *stack_wall, t_stack **stack_path,
 						t_stack **stack_save);
 
 /*Checking Colour*/
-int					check_colour(char **tab_col);
+int					check_colour(char **tab_col, t_game *data);
 
 /*Checking Texture*/
 int					chec_texture(char **tab_tex);
@@ -190,7 +190,7 @@ int					chec_texture(char **tab_tex);
 /*======Parsing======*/
 /*===================*/
 /*Parsing*/
-int					parsing(char *name_map);
+int					parsing(char *name_map, t_game *data);
 int					check_extension(char *name_map, char *extention);
 
 /*Parsing2*/
@@ -200,14 +200,6 @@ int					fill_colour_texture(char *string, char ***tab_col);
 int					clear_parsing(char **tab_map, char **tab_tex,
 						char **tab_col);
 int					check_extension(char *name_map, char *extention);
-
-/*===================*/
-/*=======MAP=========*/
-/*===================*/
-
-/*Setup_Map*/
-bool				init_map(t_game *data);
-void				wipeout_map(t_game *data);
 
 /*===================*/
 /*======PLAYER=======*/
