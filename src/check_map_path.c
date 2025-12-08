@@ -6,7 +6,7 @@
 /*   By: fmotte <fmotte@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 14:01:12 by fmotte            #+#    #+#             */
-/*   Updated: 2025/12/08 15:46:37 by fmotte           ###   ########.fr       */
+/*   Updated: 2025/12/08 16:54:23 by fmotte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ static int	check_map_path_init(t_stack **stack_path, t_stack **stack_wall,
 	return (0);
 }
 
-int	check_map_path(char **tab_map, t_game *data)
+int	check_map_path(char **tab_map)
 {
 	t_stack	*stack_path;
 	t_stack	*stack_save;
@@ -119,8 +119,6 @@ int	check_map_path(char **tab_map, t_game *data)
 	stack_save = NULL;
 	if (check_map_path_init(&stack_path, &stack_wall, &max_limit, tab_map))
 		return (1);
-	data->map_height = max_limit.y;
-	data->map_width = max_limit.x;
 	while (!is_empty_stack(stack_path))
 	{
 		while (!is_empty_stack(stack_path))

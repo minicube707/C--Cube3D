@@ -6,7 +6,7 @@
 /*   By: fmotte <fmotte@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 10:51:40 by cpollock          #+#    #+#             */
-/*   Updated: 2025/12/08 15:48:20 by fmotte           ###   ########.fr       */
+/*   Updated: 2025/12/08 16:54:56 by fmotte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,14 +167,14 @@ t_stack				*pop_stack(t_stack *st);
 /*======Checking=====*/
 /*===================*/
 /*Checking Map*/
-int					check_map(char **tab_map, t_game *data);
+int					check_map(char **tab_map);
 t_coord				get_pos_player(char **tab_map);
 int					in(t_stack *stack_path, int x, int y);
 int					get_width_map(char **tab_map);
 t_stack				*parse_map(char **tab_map);
 
 /*Checking Map Path*/
-int					check_map_path(char **tab_map, t_game *data);
+int					check_map_path(char **tab_map);
 
 /*Checking Map Path2*/
 int					clear_map(t_stack *stack_wall, t_stack **stack_path,

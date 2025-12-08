@@ -6,7 +6,7 @@
 /*   By: fmotte <fmotte@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 14:58:28 by fmotte            #+#    #+#             */
-/*   Updated: 2025/12/08 15:47:38 by fmotte           ###   ########.fr       */
+/*   Updated: 2025/12/08 17:49:37 by fmotte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	check_data(char **tab_map, char **tab_tex, char **tab_col, t_game *data)
 		printf("KO Instruction\n");
 		return (1);
 	}
-	if (check_map(tab_map, data))
+	if (check_map(tab_map))
 	{
 		printf("KO Map\n");
 		return (1);
@@ -66,6 +66,49 @@ int	open_map(char *name_map)
 	return (-1);
 }
 
+char **ft_transpose(char **tab_map)
+{
+	char **new_tab;
+	int height;
+	int width;
+	int i;
+	int j;
+	
+	height = lenght_tab(tab_map);
+	width = get_width_map(tab_map);
+	
+	new_tab = malloc(sizeof(char *) * (width + 1));
+	if (new_tab == NULL)
+	{
+		tab_char_clear(tab_map);
+		return (NULL);
+	}
+	i = 0;
+	while (i < width)
+	{
+		j = 0;
+		new_tab[i] = malloc(sizeof(char) * height);
+		if (new_tab[i] == NULL)
+		{
+			tab_char_clear(new_tab);
+			return (NULL);
+		}
+ 		while (j <= height -2)
+		{
+			
+			if (ft_strlen(tab_map[j]) > i && tab_map[j][i] != '\n')
+				new_tab[i][j] = tab_map[j][i];
+			else
+				new_tab[i][j] = '0';
+			j++;
+		}
+		new_tab[i][j] = '\0';
+		i++;
+	}
+	new_tab[i] = NULL;
+	return (new_tab);
+}
+
 int	manage_data(int fd, t_game *data)
 {
 	char	*string;
@@ -91,8 +134,26 @@ int	manage_data(int fd, t_game *data)
 	}
 	if (check_data(tab_map, tab_tex, tab_col, data))
 		return (clear_parsing(tab_map, tab_tex, tab_col));
-	data->map = tab_map;
-	clear_parsing(NULL, tab_tex, tab_col);
+		
+	int i;
+	i = 0;
+	printf("TAB\n");
+	while (tab_map[i] != NULL)
+	{
+		printf("%s", tab_map[i]);
+		i++;
+	}
+	
+	data->map = ft_transpose(tab_map);
+	clear_parsing(tab_map, tab_tex, tab_col);
+
+	i = 0;
+	printf("DATA\n");
+	while (data->map[i] != NULL)
+	{
+		printf("%s\n", data->map[i]);
+		i++;
+	}
 	return (0);
 }
 
