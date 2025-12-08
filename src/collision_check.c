@@ -25,3 +25,23 @@ bool	vect_in_wall(t_game *data, t_vector point)
 		return (true);
 	return (false);
 }
+
+bool	player_in_wall(t_game *data, t_player player)
+{
+	t_vector	check_vect;
+
+	check_vect.x = player.pos.x - (player.box_width / 2);
+	check_vect.y = player.pos.y - (player.box_width / 2);
+	if (vect_in_wall(data, check_vect))
+		return (true);
+	check_vect.x += player.box_width;
+	if (vect_in_wall(data, check_vect))
+		return (true);
+	check_vect.y += player.box_width;
+	if (vect_in_wall(data, check_vect))
+		return (true);
+	check_vect.x -= player.box_width;
+	if (vect_in_wall(data, check_vect))
+		return (true);
+	return (false);
+}

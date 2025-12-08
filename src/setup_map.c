@@ -49,6 +49,8 @@ bool	init_map(t_game *data)
 	strcpy((data->map)[16], "1110000001");
 	strcpy((data->map)[17], "1110000001");
 	strcpy((data->map)[18], "1110111111");
+	data->col_floor = 0x1a1a1a;
+	data->col_ceil = 0x454545;
 	return (true);
 }
 

@@ -42,6 +42,8 @@
 # define LEFT	65361
 # define RIGHT	65363
 # define SPACE	32
+# define LSHIFT	65505
+# define M		109
 
 /*==================================*/
 /*==============STRUCTS=============*/
@@ -60,6 +62,14 @@ typedef struct s_rectangle
 	int		height;
 }	t_rectangle;
 
+typedef struct s_arrow
+{
+	t_vector	pos;
+	double		width;
+	double		height;
+	double		angle;
+}	t_arrow;
+
 typedef struct s_player
 {
 	t_vector	pos;
@@ -72,6 +82,7 @@ typedef struct s_player
 	bool		key_right;
 	bool		key_turn_l;
 	bool		key_turn_r;
+	bool		key_sprint;
 
 	double		box_width;
 	double		walk_spd;
@@ -93,6 +104,13 @@ typedef struct s_game
 	char		**map;
 	int			map_width;
 	int			map_height;
+
+	int			col_ceil;
+	int			col_floor;
+
+	bool		minimap;
+
+	struct timeval	time_frame;
 }	t_game;
 
 /*==================================*/
@@ -113,8 +131,12 @@ void	wipeout_map(t_game *data);
 
 /*Player*/
 void	init_player(t_player *player, double x, double y, double angle);
-void	move_player(t_player *player);
+void	move_player(t_game *data, t_player *player);
 void	turn_player(t_player *player);
+
+/*Player collision*/
+void	move_collision(t_game *data, t_player *player,
+			double x_spd, double y_spd);
 
 /*===================*/
 /*========DRAW=======*/
@@ -124,6 +146,16 @@ void	turn_player(t_player *player);
 void	draw_pixel(t_game *data, int x, int y, int color);
 void	draw_rectangle(t_game *data, t_rectangle rect, int color);
 void	draw_line(t_game *data, t_vector vct1, t_vector vct2, int color);
+
+/*Draw_Arrow*/
+void	draw_arrow(t_game *data, t_arrow arrow, int color);
+
+/*=========================*/
+/*========REDNDERING=======*/
+/*=========================*/
+
+/*Draw_Minimap*/
+void	draw_minimap(t_game *data);
 
 /*===================*/
 /*===MATHEMATIQUES===*/
@@ -156,6 +188,7 @@ int		raycast(t_game *data, t_vector *ray_vect, double angle);
 
 /*Collision*/
 bool	vect_in_wall(t_game *data, t_vector point);
+bool	player_in_wall(t_game *data, t_player player);
 
 /*===================*/
 /*=======EVENT=======*/

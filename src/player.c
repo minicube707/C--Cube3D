@@ -24,12 +24,12 @@ void	init_player(t_player *player, double x, double y, double angle)
 	player->key_right = false;
 	player->key_turn_l = false;
 	player->key_turn_r = false;
-	player->box_width = TILE_LEN / 2;
-	player->walk_spd = 0.25;
-	player->turn_spd = 0.25;
+	player->box_width = TILE_LEN * 0.6;
+	player->walk_spd = 2;
+	player->turn_spd = 2;
 }
 
-void	move_player(t_player *player)
+void	move_player(t_game *data, t_player *player)
 {
 	double	spd;
 	double	angle_add;
@@ -38,6 +38,7 @@ void	move_player(t_player *player)
 		|| (player->key_left ^ player->key_right))
 	{
 		spd = player->walk_spd;
+		spd *= 1 + ((player->key_sprint) * 2.25);
 		angle_add = 0;
 		if (player->key_down && !player->key_up)
 			spd = -spd;
@@ -51,8 +52,9 @@ void	move_player(t_player *player)
 			if (spd < 0)
 				angle_add = -angle_add;
 		}
-		player->pos.x += dcos(player->direction - angle_add) * spd;
-		player->pos.y += dsin(player->direction - angle_add) * spd;
+		move_collision(data, player,
+			dcos(player->direction - angle_add) * spd,
+			dsin(player->direction - angle_add) * spd);
 	}
 }
 
