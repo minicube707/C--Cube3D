@@ -6,18 +6,18 @@
 /*   By: fmotte <fmotte@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/05 13:06:37 by fmotte            #+#    #+#             */
-/*   Updated: 2025/12/08 14:45:19 by fmotte           ###   ########.fr       */
+/*   Updated: 2025/12/08 15:17:35 by fmotte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-unsigned int	rgb2colour(unsigned int r, unsigned int g, unsigned int b)
+static unsigned int	rgb2colour(unsigned int r, unsigned int g, unsigned int b)
 {
 	return ((0 << 24) | (r << 16) | (g << 8) | b);
 }
 
-int	check_colour_rgb(char *string)
+static int	check_colour_rgb(char *string)
 {
 	int	num;
 
@@ -27,7 +27,7 @@ int	check_colour_rgb(char *string)
 	return (-1);
 }
 
-int	extract_colour(char **tab_col, int index)
+static int	extract_colour(char **tab_col, int index)
 {
 	char	**tab_split;
 	int		r;

@@ -6,7 +6,7 @@
 /*   By: fmotte <fmotte@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/05 13:04:43 by fmotte            #+#    #+#             */
-/*   Updated: 2025/12/08 14:43:20 by fmotte           ###   ########.fr       */
+/*   Updated: 2025/12/08 15:18:05 by fmotte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	get_width_map(char **tab_map)
 	return (max_width);
 }
 
-int	check_map_player(char **tab_map)
+static int	check_map_player(char **tab_map)
 {
 	int	i;
 	int	j;
@@ -86,7 +86,7 @@ int	check_map_player(char **tab_map)
 	return (1);
 }
 
-int	check_map_char(char **tab_map)
+static int	check_map_char(char **tab_map)
 {
 	int		i;
 	int		j;

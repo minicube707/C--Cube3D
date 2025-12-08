@@ -6,7 +6,7 @@
 #    By: fmotte <fmotte@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/28 11:37:49 by cpollock          #+#    #+#              #
-#    Updated: 2025/12/08 14:43:44 by fmotte           ###   ########.fr        #
+#    Updated: 2025/12/08 15:19:16 by fmotte           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,23 +23,31 @@ CFLAGS = -Wall -Wextra -Werror -MMD -MP -g
 # =======================================
 #              FILE
 # =======================================
-FILE_NAMES = 	check_colour \
-				check_map \
+FILE_NAMES = 	angle_math \
+				check_colour \
 				check_map2 \
-				check_map_path \
+				check_map \
 				check_map_path2 \
+				check_map_path \
 				check_texture \
+				collision_check \
+				draw_arrow \
 				draw_basic \
+				draw_minimap \
 				dtrig \
 				ft_realloc \
 				ft_split \
+				key_events \
 				loop_event \
 				main \
 				mini_libft2 \
 				mini_libft \
+				parsing2 \
 				parsing \
 				player \
+				player_collision \
 				point_math \
+				raycast \
 				setup_map \
 				stack \
 				tab_utils \

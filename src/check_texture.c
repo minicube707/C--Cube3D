@@ -6,13 +6,13 @@
 /*   By: fmotte <fmotte@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/05 16:30:59 by fmotte            #+#    #+#             */
-/*   Updated: 2025/12/08 14:51:04 by fmotte           ###   ########.fr       */
+/*   Updated: 2025/12/08 15:18:31 by fmotte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	check_texture_path(char *string)
+static int	check_texture_path(char *string)
 {
 	char	*tmp;
 
@@ -31,7 +31,7 @@ int	check_texture_path(char *string)
 	return (0);
 }
 
-int	chec_texture_utils(char *tab_string, char *string, int j)
+static int	chec_texture_utils(char *tab_string, char *string, int j)
 {
 	char	*sub_string;
 

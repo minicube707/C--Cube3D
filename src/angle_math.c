@@ -1,28 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dtrig.c                                            :+:      :+:    :+:   */
+/*   angle_math.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fmotte <fmotte@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/02 11:01:27 by cpollock          #+#    #+#             */
-/*   Updated: 2025/12/02 15:20:18 by fmotte           ###   ########.fr       */
+/*   Created: 2025/12/04 10:40:17 by cpollock          #+#    #+#             */
+/*   Updated: 2025/12/08 14:56:43 by fmotte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-double	dsin(double angle)
+double	deg2rad(double angle)
 {
-	return (sin(deg2rad(angle)));
+	return (fmod(angle * (PI / 180), PI * 2));
 }
 
-double	dcos(double angle)
+double	angle_limit(double angle)
 {
-	return (cos(deg2rad(angle)));
-}
-
-double	dtan(double angle)
-{
-	return (tan(deg2rad(angle)));
+	if (angle >= 0)
+			angle = fmod(angle, 360);
+	else
+		angle = 360 + fmod(angle, 360);
+	return (angle);
 }

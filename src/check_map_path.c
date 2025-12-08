@@ -6,13 +6,13 @@
 /*   By: fmotte <fmotte@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 14:01:12 by fmotte            #+#    #+#             */
-/*   Updated: 2025/12/08 14:41:50 by fmotte           ###   ########.fr       */
+/*   Updated: 2025/12/08 15:16:59 by fmotte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	add_path(t_stack **stack_path, t_stack **stack_save, int x, int y)
+static int	add_path(t_stack **stack_path, t_stack **stack_save, int x, int y)
 {
 	*stack_save = push_stack(*stack_save, x, y);
 	if (*stack_save == NULL)
@@ -23,7 +23,7 @@ int	add_path(t_stack **stack_path, t_stack **stack_save, int x, int y)
 	return (0);
 }
 
-int	chech_path_x(t_stack *stack_wall, t_stack **stack_path,
+static int	chech_path_x(t_stack *stack_wall, t_stack **stack_path,
 		t_stack **stack_save, int max)
 {
 	t_coord	*node;
@@ -53,7 +53,7 @@ int	chech_path_x(t_stack *stack_wall, t_stack **stack_path,
 	return (0);
 }
 
-int	chech_path_y(t_stack *stack_wall, t_stack **stack_path,
+static int	chech_path_y(t_stack *stack_wall, t_stack **stack_path,
 		t_stack **stack_save, int max)
 {
 	t_coord	*node;
@@ -83,7 +83,7 @@ int	chech_path_y(t_stack *stack_wall, t_stack **stack_path,
 	return (0);
 }
 
-int	check_map_path_init(t_stack **stack_path, t_stack **stack_wall,
+static int	check_map_path_init(t_stack **stack_path, t_stack **stack_wall,
 		t_coord *max_limit, char **tab_map)
 {
 	t_coord	pos_player;
