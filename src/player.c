@@ -24,6 +24,7 @@ void	init_player(t_player *player, double x, double y, double angle)
 	player->key_right = false;
 	player->key_turn_l = false;
 	player->key_turn_r = false;
+	player->key_sprint = false;
 	player->box_width = TILE_LEN * 0.6;
 	player->walk_spd = 2;
 	player->turn_spd = 2;
