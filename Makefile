@@ -6,7 +6,7 @@
 #    By: fmotte <fmotte@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/28 11:37:49 by cpollock          #+#    #+#              #
-#    Updated: 2025/12/08 15:19:16 by fmotte           ###   ########.fr        #
+#    Updated: 2025/12/08 15:45:00 by fmotte           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,7 +48,6 @@ FILE_NAMES = 	angle_math \
 				player_collision \
 				point_math \
 				raycast \
-				setup_map \
 				stack \
 				tab_utils \
 				vect_math

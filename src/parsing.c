@@ -6,25 +6,25 @@
 /*   By: fmotte <fmotte@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 14:58:28 by fmotte            #+#    #+#             */
-/*   Updated: 2025/12/08 15:13:34 by fmotte           ###   ########.fr       */
+/*   Updated: 2025/12/08 15:47:38 by fmotte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	check_data(char **tab_map, char **tab_tex, char **tab_col)
+int	check_data(char **tab_map, char **tab_tex, char **tab_col, t_game *data)
 {
 	if (tab_map == NULL || tab_tex == NULL || tab_col == NULL)
 	{
 		printf("KO Instruction\n");
 		return (1);
 	}
-	if (check_map(tab_map))
+	if (check_map(tab_map, data))
 	{
 		printf("KO Map\n");
 		return (1);
 	}
-	if (check_colour(tab_col))
+	if (check_colour(tab_col, data))
 	{
 		printf("KO Colour\n");
 		return (1);
@@ -66,7 +66,7 @@ int	open_map(char *name_map)
 	return (-1);
 }
 
-int	manage_data(int fd)
+int	manage_data(int fd, t_game *data)
 {
 	char	*string;
 	char	**tab_map;
@@ -89,13 +89,14 @@ int	manage_data(int fd)
 				return (clear_parsing(tab_map, tab_tex, tab_col));
 		}
 	}
-	if (check_data(tab_map, tab_tex, tab_col))
+	if (check_data(tab_map, tab_tex, tab_col, data))
 		return (clear_parsing(tab_map, tab_tex, tab_col));
-	clear_parsing(tab_map, tab_tex, tab_col);
+	data->map = tab_map;
+	clear_parsing(NULL, tab_tex, tab_col);
 	return (0);
 }
 
-int	parsing(char *name_map)
+int	parsing(char *name_map, t_game *data)
 {
 	int	fd;
 
@@ -104,7 +105,7 @@ int	parsing(char *name_map)
 	fd = open_map(name_map);
 	if (fd == -1)
 		return (1);
-	if (manage_data(fd))
+	if (manage_data(fd, data))
 		return (1);
 	return (0);
 }

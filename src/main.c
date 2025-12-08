@@ -6,7 +6,7 @@
 /*   By: fmotte <fmotte@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 11:12:30 by cpollock          #+#    #+#             */
-/*   Updated: 2025/12/08 15:19:46 by fmotte           ###   ########.fr       */
+/*   Updated: 2025/12/08 15:50:09 by fmotte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,8 @@ int	main(int argc, char **argv)
 		printf("Wrong number of argument\n");
 		return (1);
 	}
-	if (parsing(argv[1]))
+	if (parsing(argv[1], &data))
 		return (0);
-	
 	if (!init_game(&data))
 		return (1);
 	init_player(&data.player, W_WIDTH / 2, W_HEIGHT / 2, 270);
@@ -49,8 +48,6 @@ static bool	init_game(t_game *data)
 			&data->endian);
 	data->win = mlx_new_window(data->mlx, W_WIDTH, W_HEIGHT, GAMENAME);
 	if (data->win == NULL)
-		return (free(data->mlx), false);
-	if (!init_map(data))
 		return (free(data->mlx), false);
 	data->minimap = false;
 	gettimeofday(&data->time_frame, NULL);

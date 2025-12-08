@@ -6,7 +6,7 @@
 /*   By: fmotte <fmotte@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/05 13:04:43 by fmotte            #+#    #+#             */
-/*   Updated: 2025/12/08 15:18:05 by fmotte           ###   ########.fr       */
+/*   Updated: 2025/12/08 15:47:15 by fmotte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,13 +112,13 @@ static int	check_map_char(char **tab_map)
 	return (0);
 }
 
-int	check_map(char **tab_map)
+int	check_map(char **tab_map, t_game *data)
 {
 	if (check_map_char(tab_map))
 		return (1);
 	if (check_map_player(tab_map))
 		return (1);
-	if (check_map_path(tab_map))
+	if (check_map_path(tab_map, data))
 		return (1);
 	return (0);
 }
