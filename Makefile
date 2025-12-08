@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: florent <florent@student.42.fr>            +#+  +:+       +#+         #
+#    By: fmotte <fmotte@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/28 11:37:49 by cpollock          #+#    #+#              #
-#    Updated: 2025/12/06 23:11:20 by florent          ###   ########.fr        #
+#    Updated: 2025/12/08 14:43:44 by fmotte           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,9 @@ CFLAGS = -Wall -Wextra -Werror -MMD -MP -g
 # =======================================
 FILE_NAMES = 	check_colour \
 				check_map \
+				check_map2 \
+				check_map_path \
+				check_map_path2 \
 				check_texture \
 				draw_basic \
 				dtrig \

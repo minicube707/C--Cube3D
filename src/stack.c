@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   stack.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: florent <florent@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fmotte <fmotte@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/06 23:10:55 by florent           #+#    #+#             */
-/*   Updated: 2025/12/07 01:01:32 by florent          ###   ########.fr       */
+/*   Updated: 2025/12/08 13:03:54 by fmotte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,30 +24,45 @@ int	is_empty_stack(t_stack *st)
 	return (0);
 }
 
+t_stack	*push_stack_utils(t_stack *st, t_coord *coord, t_stack	*element)
+{
+	t_stack *start;
+    
+	element->coord = coord;
+	element->next = NULL;
+	if (st == NULL)
+		return (element);
+	start = st;
+	while (st->next != NULL)
+		st = st->next;
+	st->next = element;
+	return (start);
+}
+
 t_stack	*push_stack(t_stack *st, int x, int y)
 {
 	t_stack	*element;
     t_coord *coord;
-    
-	element = malloc(sizeof(*element));
+	
+	element = malloc(sizeof(t_stack));
 	if (element == NULL)
 	{
+		clear_stack(st);
 		printf("Probleme allocation dynamique\n");
 		return (NULL);
 	}
     coord = malloc(sizeof(t_coord));
     if (element == NULL)
 	{
+		clear_stack(st);
 		printf("Probleme allocation dynamique\n");
         free(element);
 		return (NULL);
 	}
-    coord->x = x;
+	coord->x = x;
     coord->y = y;
-	element->coord = coord;
-	element->next = st;
-	return (element);
-}
+    return (push_stack_utils(st, coord, element));
+} 
 
 t_stack	*clear_stack(t_stack *st)
 {
