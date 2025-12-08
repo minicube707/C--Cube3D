@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   collision_check.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpollock <cpollock@42.fr>                  +#+  +:+       +#+        */
+/*   By: fmotte <fmotte@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/04 14:34:33 by cpollock          #+#    #+#             */
-/*   Updated: 2025/12/04 14:34:46 by cpollock         ###   ########.fr       */
+/*   Updated: 2025/12/08 14:56:57 by fmotte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3d.h"
+#include "cub3d.h"
 
 bool	vect_in_wall(t_game *data, t_vector point)
 {

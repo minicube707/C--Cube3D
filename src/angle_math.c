@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   angle_math.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpollock <cpollock@42.fr>                  +#+  +:+       +#+        */
+/*   By: fmotte <fmotte@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/04 10:40:17 by cpollock          #+#    #+#             */
-/*   Updated: 2025/12/04 10:40:28 by cpollock         ###   ########.fr       */
+/*   Updated: 2025/12/08 14:56:43 by fmotte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3d.h"
+#include "cub3d.h"
 
 double	deg2rad(double angle)
 {

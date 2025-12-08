@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpollock <cpollock@42.fr>                  +#+  +:+       +#+        */
+/*   By: fmotte <fmotte@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 12:57:20 by cpollock          #+#    #+#             */
-/*   Updated: 2025/11/28 12:57:32 by cpollock         ###   ########.fr       */
+/*   Updated: 2025/12/02 15:20:44 by fmotte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3d.h"
+#include "cub3d.h"
 
 void	init_player(t_player *player, double x, double y, double angle)
 {

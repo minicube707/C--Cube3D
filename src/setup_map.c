@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   setup_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpollock <cpollock@42.fr>                  +#+  +:+       +#+        */
+/*   By: fmotte <fmotte@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 12:33:41 by cpollock          #+#    #+#             */
-/*   Updated: 2025/12/02 12:33:52 by cpollock         ###   ########.fr       */
+/*   Updated: 2025/12/02 15:20:52 by fmotte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3d.h"
+#include "cub3d.h"
 #include <string.h>
 
 bool	init_map(t_game *data)

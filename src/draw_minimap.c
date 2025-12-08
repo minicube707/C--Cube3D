@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   draw_minimap.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpollock <cpollock@42.fr>                  +#+  +:+       +#+        */
+/*   By: fmotte <fmotte@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/05 12:36:23 by cpollock          #+#    #+#             */
-/*   Updated: 2025/12/05 12:36:33 by cpollock         ###   ########.fr       */
+/*   Updated: 2025/12/08 14:57:10 by fmotte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3d.h"
+#include "cub3d.h"
 
 static void	minimap_walls(t_game *data, int unit_len, int map_x, int map_y);
 static void	minimap_player(t_game *data, int unit_len, int map_x, int map_y);

@@ -3,23 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpollock <cpollock@42.fr>                  +#+  +:+       +#+        */
+/*   By: fmotte <fmotte@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 11:12:30 by cpollock          #+#    #+#             */
-/*   Updated: 2025/11/28 11:12:41 by cpollock         ###   ########.fr       */
+/*   Updated: 2025/12/08 15:19:46 by fmotte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3d.h"
+#include "cub3d.h"
 
 static bool	init_game(t_game *data);
 
-int	main(int arg_c, char *arg_s[])
+int	main(int argc, char **argv)
 {
 	t_game	data;
 
-	(void) arg_c;
-	(void) arg_s;
+	if (argc != 2)
+	{
+		printf("Wrong number of argument\n");
+		return (1);
+	}
+	if (parsing(argv[1]))
+		return (0);
+	
 	if (!init_game(&data))
 		return (1);
 	init_player(&data.player, W_WIDTH / 2, W_HEIGHT / 2, 270);

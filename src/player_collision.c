@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   player_collision.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpollock <cpollock@42.fr>                  +#+  +:+       +#+        */
+/*   By: fmotte <fmotte@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/05 11:41:34 by cpollock          #+#    #+#             */
-/*   Updated: 2025/12/05 11:41:45 by cpollock         ###   ########.fr       */
+/*   Updated: 2025/12/08 14:57:41 by fmotte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3d.h"
+#include "cub3d.h"
 
 static void	move_collision_x(t_game *data, t_player *player, double spd);
 static void	move_collision_y(t_game *data, t_player *player, double spd);

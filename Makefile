@@ -6,43 +6,77 @@
 #    By: fmotte <fmotte@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/28 11:37:49 by cpollock          #+#    #+#              #
-#    Updated: 2025/12/02 14:09:42 by fmotte           ###   ########.fr        #
+#    Updated: 2025/12/08 15:19:16 by fmotte           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = cub3d
+# =======================================
+#            MAKEFILE PROJET
+# =======================================
 
+# =======================================
+#                FLAGS
+# =======================================
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -MMD -MP -g 
 
-FILE_NAMES =	main \
-				setup_map \
-				key_events \
-				player \
-				player_collision \
-				draw_basic \
+# =======================================
+#              FILE
+# =======================================
+FILE_NAMES = 	angle_math \
+				check_colour \
+				check_map2 \
+				check_map \
+				check_map_path2 \
+				check_map_path \
+				check_texture \
+				collision_check \
 				draw_arrow \
+				draw_basic \
 				draw_minimap \
 				dtrig \
-				angle_math \
-				point_math \
-				vect_math \
-				collision_check \
+				ft_realloc \
+				ft_split \
+				key_events \
 				loop_event \
-				raycast
+				main \
+				mini_libft2 \
+				mini_libft \
+				parsing2 \
+				parsing \
+				player \
+				player_collision \
+				point_math \
+				raycast \
+				setup_map \
+				stack \
+				tab_utils \
+				vect_math
 
+# =======================================
+#              VARIABLE
+# =======================================	
 SRC_PATH = src
 OBJ_PATH = obj
 HEA_PATH = include
 
 SRC_FILES = $(FILE_NAMES:%=$(SRC_PATH)/%.c)
 OBJ_FILES = $(FILE_NAMES:%=$(OBJ_PATH)/%.o)
+DEP_FILES = $(OBJ_FILES:.o=.d)
 HEA_FILES = $(HEA_PATH)/cub3d.h
+
+INCLUDE = -I $(HEA_PATH) -I gnl/include
+ARCHIVE =  -L gnl -l gnl
 
 MLX_GIT = https://github.com/42Paris/minilibx-linux.git
 MLX_PATH = mlx
 MLX_HEAD = $(MLX_PATH)/mlx.h
 
+NAME = cub3d
+
+# =======================================
+#              RULES
+# =======================================
 all: $(NAME)
 
 bonus: all
@@ -53,17 +87,19 @@ $(OBJ_PATH) :
 	mkdir -p $(OBJ_PATH)
 	
 $(NAME): $(OBJ_FILES) $(MLX_HEAD)
-	$(CC) $(CFLAGS) $(OBJ_FILES) -Lmlx -lmlx -L/usr/lib -Imlx -lXext -lX11 -lm -lz -o $(NAME)
+	@$(MAKE) -s -C gnl
+	$(CC) $(CFLAGS) $(OBJ_FILES) $(ARCHIVE) -Lmlx -lmlx -L/usr/lib -Imlx -lXext -lX11 -lm -lz -o $(NAME)
 
 $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c $(HEA_FILES) | $(OBJ_PATH) $(MLX_HEAD)
-	$(CC) $(CFLAGS) -I/usr/include -Imlx -O3 -c $< -o $@
+	$(CC) $(CFLAGS) $(INCLUDE)  -I/usr/include -Imlx -O3 -c $< -o $@
 
 $(MLX_HEAD):
 	git clone $(MLX_GIT) $(MLX_PATH)
 	make -C $(MLX_PATH)
 
 clean:
-	rm -f $(OBJ_FILES)
+	@$(MAKE) -s -C gnl fclean
+	rm -f $(OBJ_FILES) $(DEP_FILES)
 	rm -rf $(OBJ_PATH)
 
 fclean: clean
@@ -73,3 +109,6 @@ re: fclean all
 
 reset: fclean
 	rm -rf $(MLX_PATH)
+
+# Inclusion automatique des fichiers .d s’ils existent
+-include $(DEP_FILES)
