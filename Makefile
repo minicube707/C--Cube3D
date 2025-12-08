@@ -19,7 +19,10 @@ FILE_NAMES =	main \
 				setup_map \
 				key_events \
 				player \
+				player_collision \
 				draw_basic \
+				draw_arrow \
+				draw_minimap \
 				dtrig \
 				angle_math \
 				point_math \

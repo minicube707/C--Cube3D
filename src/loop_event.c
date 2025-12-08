@@ -14,33 +14,25 @@
 
 static void		raycast_test(t_game *data, int color);
 static double	fix_dist(double dist, double player_angle, double ray_angle);
-static void		wall_test(t_game *data);
 
 int	loop_event(t_game *data)
 {
-	t_rectangle	player_square;
-	t_vector	dir_vect;
+	struct timeval	time_check;
+	double	time_diff;
 
-	player_square.x = data->player.pos.x - (data->player.box_width / 2);
-	player_square.y = data->player.pos.y - (data->player.box_width / 2);
-	player_square.width = data->player.box_width;
-	player_square.height = data->player.box_width;
-	draw_rectangle(data, player_square, 0);
-	dir_vect.x = data->player.pos.x + dcos(data->player.direction) * 11;
-	dir_vect.y = data->player.pos.y + dsin(data->player.direction) * 11;
-	draw_line(data, data->player.pos, dir_vect, 0);
-	raycast_test(data, 0);
-	turn_player(&data->player);
-	move_player(&data->player);
-	player_square.x = data->player.pos.x - (data->player.box_width / 2);
-	player_square.y = data->player.pos.y - (data->player.box_width / 2);
-	draw_rectangle(data, player_square, 0x00FF00);
-	dir_vect.x = data->player.pos.x + dcos(data->player.direction) * 11;
-	dir_vect.y = data->player.pos.y + dsin(data->player.direction) * 11;
-	draw_line(data, data->player.pos, dir_vect, 0x0000FF);
-	wall_test(data);
-	raycast_test(data, 0x0000FF);
-	mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);
+	gettimeofday(&time_check, NULL);
+	time_diff = (time_check.tv_sec * 1000) + (time_check.tv_usec / 1000);
+	time_diff -= (data->time_frame.tv_sec * 1000) + (data->time_frame.tv_usec / 1000);
+	if (time_diff > 1000/60)
+	{
+		data->time_frame.tv_sec = time_check.tv_sec;
+		data->time_frame.tv_usec = time_check.tv_usec;
+		turn_player(&data->player);
+		move_player(data, &data->player);
+		raycast_test(data, 0x0000FF);
+		draw_minimap(data);
+		mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);
+	}
 	return (0);
 }
 
@@ -72,9 +64,20 @@ static void	raycast_test(t_game *data, int color)
 		double height = (TILE_LEN / dist) * (W_WIDTH);
 		double start_y = (W_HEIGHT - height) / 2;
 		double end = start_y + height;
+		double ceil_y = 0;
+		while (ceil_y < start_y)
+		{
+			draw_pixel(data, i, ceil_y, data->col_ceil);
+			ceil_y += 1;
+		}
 		while (start_y < end)
 		{
 			draw_pixel(data, i, start_y, color);
+			start_y += 1;
+		}
+		while (start_y < W_HEIGHT)
+		{
+			draw_pixel(data, i, start_y, data->col_floor);
 			start_y += 1;
 		}
 		ray_angle += data->player.fov / W_WIDTH;
@@ -88,30 +91,4 @@ static double	fix_dist(double dist, double player_angle, double ray_angle)
 
 	angle_diff = angle_limit(player_angle - ray_angle);
 	return (dist * dcos(angle_diff));
-}
-
-static void	wall_test(t_game *data)
-{
-	int			i;
-	int			j;
-	t_rectangle	wall_rect;
-
-	i = 0;
-	wall_rect.width = TILE_LEN;
-	wall_rect.height = TILE_LEN;
-	while ((data->map)[i] != NULL)
-	{
-		j = 0;
-		while ((data->map)[i][j] != '\0')
-		{
-			if ((data->map)[i][j] == '1')
-			{
-				wall_rect.x = i * TILE_LEN;
-				wall_rect.y = j * TILE_LEN;
-				draw_rectangle(data, wall_rect, 0x850000);
-			}
-			j++;
-		}
-		i++;
-	}
 }

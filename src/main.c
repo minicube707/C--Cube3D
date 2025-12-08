@@ -46,5 +46,7 @@ static bool	init_game(t_game *data)
 		return (free(data->mlx), false);
 	if (!init_map(data))
 		return (free(data->mlx), false);
+	data->minimap = false;
+	gettimeofday(&data->time_frame, NULL);
 	return (true);
 }
