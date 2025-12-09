@@ -6,16 +6,11 @@
 /*   By: fmotte <fmotte@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/06 23:10:55 by florent           #+#    #+#             */
-/*   Updated: 2025/12/08 13:03:54 by fmotte           ###   ########.fr       */
+/*   Updated: 2025/12/09 13:32:54 by fmotte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-t_stack	*new_stack(void)
-{
-	return (NULL);
-}
 
 int	is_empty_stack(t_stack *st)
 {
@@ -24,10 +19,10 @@ int	is_empty_stack(t_stack *st)
 	return (0);
 }
 
-t_stack	*push_stack_utils(t_stack *st, t_coord *coord, t_stack	*element)
+t_stack	*push_stack_utils(t_stack *st, t_coord *coord, t_stack *element)
 {
-	t_stack *start;
-    
+	t_stack	*start;
+
 	element->coord = coord;
 	element->next = NULL;
 	if (st == NULL)
@@ -42,36 +37,36 @@ t_stack	*push_stack_utils(t_stack *st, t_coord *coord, t_stack	*element)
 t_stack	*push_stack(t_stack *st, int x, int y)
 {
 	t_stack	*element;
-    t_coord *coord;
-	
+	t_coord	*coord;
+
 	element = malloc(sizeof(t_stack));
 	if (element == NULL)
 	{
 		clear_stack(st);
-		printf("Probleme allocation dynamique\n");
+		printf("Error\nProbleme allocation dynamique\n");
 		return (NULL);
 	}
-    coord = malloc(sizeof(t_coord));
-    if (element == NULL)
+	coord = malloc(sizeof(t_coord));
+	if (element == NULL)
 	{
 		clear_stack(st);
-		printf("Probleme allocation dynamique\n");
-        free(element);
+		printf("Error\nProbleme allocation dynamique\n");
+		free(element);
 		return (NULL);
 	}
 	coord->x = x;
-    coord->y = y;
-    return (push_stack_utils(st, coord, element));
-} 
+	coord->y = y;
+	return (push_stack_utils(st, coord, element));
+}
 
 t_stack	*clear_stack(t_stack *st)
 {
 	while ((!is_empty_stack(st)))
-    {
-        free(st->coord);    
-        st = pop_stack(st);
-    }
-	return (new_stack());
+	{
+		free(st->coord);
+		st = pop_stack(st);
+	}
+	return (NULL);
 }
 
 t_stack	*pop_stack(t_stack *st)
@@ -79,7 +74,7 @@ t_stack	*pop_stack(t_stack *st)
 	t_stack	*element;
 
 	if (is_empty_stack(st))
-		return (new_stack());
+		return (NULL);
 	element = st->next;
 	free(st);
 	return (element);

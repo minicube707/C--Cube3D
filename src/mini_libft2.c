@@ -6,30 +6,30 @@
 /*   By: fmotte <fmotte@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/03 16:16:52 by fmotte            #+#    #+#             */
-/*   Updated: 2025/12/05 17:02:04 by fmotte           ###   ########.fr       */
+/*   Updated: 2025/12/09 13:35:13 by fmotte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-char *skip_white_space(char *string)
+char	*skip_white_space(char *string)
 {
-    int i;
-    char *res;
-    
-    i = 0;
-    while (string[i] != '\0' && !(32 < string[i] && string[i] <= 126))
-        i++;
-    res = ft_substr(string, i, ft_strlen(string));
-    return (res);
+	int		i;
+	char	*res;
+
+	i = 0;
+	while (string[i] != '\0' && !(32 < string[i] && string[i] <= 126))
+		i++;
+	res = ft_substr(string, i, ft_strlen(string));
+	return (res);
 }
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	size_t		size;
-	size_t		i;
-	char		*p;
-	size_t		min;
+	size_t	size;
+	size_t	i;
+	char	*p;
+	size_t	min;
 
 	i = 0;
 	size = 0;

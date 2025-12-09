@@ -6,7 +6,7 @@
 /*   By: fmotte <fmotte@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 13:10:42 by fmotte            #+#    #+#             */
-/*   Updated: 2025/12/02 18:11:17 by fmotte           ###   ########.fr       */
+/*   Updated: 2025/12/09 14:03:46 by fmotte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ static char	**ft_realloc_utils_utils(char **newtab, char **tab, char *string)
 
 	i = -1;
 	while (tab[++i] != NULL)
-        newtab[i] = tab[i];
+		newtab[i] = tab[i];
 	free(tab);
-    newtab[i] = string;
+	newtab[i] = string;
 	newtab[i + 1] = NULL;
 	return (newtab);
 }

@@ -6,7 +6,7 @@
 /*   By: fmotte <fmotte@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 10:51:40 by cpollock          #+#    #+#             */
-/*   Updated: 2025/12/08 16:54:56 by fmotte           ###   ########.fr       */
+/*   Updated: 2025/12/09 13:50:25 by fmotte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,6 +153,9 @@ int					lenght_tab(char **tab);
 
 /*Ft_Split*/
 char				**ft_split(char const *s, char c);
+
+/*Ft_Transpose*/
+char				**ft_transpose(char **tab_map);
 
 /*===================*/
 /*=======Stack=======*/
