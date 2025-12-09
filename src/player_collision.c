@@ -6,7 +6,7 @@
 /*   By: fmotte <fmotte@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/05 11:41:34 by cpollock          #+#    #+#             */
-/*   Updated: 2025/12/08 14:57:41 by fmotte           ###   ########.fr       */
+/*   Updated: 2025/12/09 15:51:05 by fmotte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static void	move_collision_x(t_game *data, t_player *player, double spd)
 		if (sgn > 0)
 			player->pos.x += back - 0.0001;
 		else
-			player->pos.x += TILE_LEN + back;
+			player->pos.x += TILE_LEN + back + 0.0001;
 		while (player_in_wall(data, *player))
 			player->pos.x -= TILE_LEN * sgn;
 	}
@@ -60,7 +60,7 @@ static void	move_collision_y(t_game *data, t_player *player, double spd)
 		if (sgn > 0)
 			player->pos.y += back - 0.0001;
 		else
-			player->pos.y += TILE_LEN + back;
+			player->pos.y += TILE_LEN + back + 0.0001;
 		while (player_in_wall(data, *player))
 			player->pos.y -= TILE_LEN * sgn;
 	}

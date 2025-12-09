@@ -6,17 +6,14 @@
 /*   By: fmotte <fmotte@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 12:57:20 by cpollock          #+#    #+#             */
-/*   Updated: 2025/12/02 15:20:44 by fmotte           ###   ########.fr       */
+/*   Updated: 2025/12/09 15:48:09 by fmotte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	init_player(t_player *player, double x, double y, double angle)
+void	init_player(t_player *player)
 {
-	player->pos.x = x;
-	player->pos.y = y;
-	player->direction = angle;
 	player->fov = 60;
 	player->key_up = false;
 	player->key_down = false;
