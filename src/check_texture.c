@@ -6,7 +6,7 @@
 /*   By: fmotte <fmotte@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/05 16:30:59 by fmotte            #+#    #+#             */
-/*   Updated: 2025/12/08 15:18:31 by fmotte           ###   ########.fr       */
+/*   Updated: 2025/12/09 15:04:52 by fmotte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,6 @@ static int	check_texture_path(char *string)
 	char	*tmp;
 
 	tmp = skip_white_space(string);
-	if (ft_strncmp(tmp, "textures/", 8) != 0)
-	{
-		free(tmp);
-		return (1);
-	}
 	if (!check_extension(tmp, ".xpm\n"))
 	{
 		free(tmp);
