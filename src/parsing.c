@@ -6,7 +6,7 @@
 /*   By: fmotte <fmotte@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 14:58:28 by fmotte            #+#    #+#             */
-/*   Updated: 2025/12/09 14:04:36 by fmotte           ###   ########.fr       */
+/*   Updated: 2025/12/09 15:07:35 by fmotte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,26 +40,8 @@ int	check_data(char **tab_map, char **tab_tex, char **tab_col, t_game *data)
 int	open_map(char *name_map)
 {
 	int		fd;
-	char	*path;
 
-	path = ft_strjoin("maps/good/", name_map);
-	if (path == NULL)
-	{
-		printf("Error\nfail malloc\n");
-		return (-1);
-	}
-	fd = open(path, O_RDONLY);
-	free(path);
-	if (fd > 2)
-		return (fd);
-	path = ft_strjoin("maps/bad/", name_map);
-	if (path == NULL)
-	{
-		printf("Error\nfail malloc\n");
-		return (-1);
-	}
-	fd = open(path, O_RDONLY);
-	free(path);
+	fd = open(name_map, O_RDONLY);
 	if (fd > 2)
 		return (fd);
 	printf("Error\n404 %s file not found\n", name_map);
