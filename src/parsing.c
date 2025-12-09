@@ -51,8 +51,8 @@ int	open_map(char *name_map)
 int	manage_data_utils(char **tab_map, char **tab_tex, char **tab_col,
 		t_game *data)
 {
-	t_coord coord;
-	
+	t_coord	coord;
+
 	if (check_data(tab_map, tab_tex, tab_col, data))
 		return (clear_parsing(tab_map, tab_tex, tab_col));
 	data->map = ft_transpose(tab_map);
@@ -60,8 +60,8 @@ int	manage_data_utils(char **tab_map, char **tab_tex, char **tab_col,
 	data->map_height = lenght_tab(tab_map);
 	data->map_width = get_width_map(tab_map);
 	clear_parsing(tab_map, tab_tex, tab_col);
-	data->player.pos.x = (double) (coord.x * TILE_LEN) + (TILE_LEN / 2);
-	data->player.pos.y = (double) (coord.y * TILE_LEN) + (TILE_LEN / 2);
+	data->player.pos.x = (double)((coord.x * TILE_LEN) + (TILE_LEN / 2));
+	data->player.pos.y = (double)((coord.y * TILE_LEN) + (TILE_LEN / 2));
 	data->player.direction = (double) get_ori_player(data->map) * 90;
 	return (0);
 }
