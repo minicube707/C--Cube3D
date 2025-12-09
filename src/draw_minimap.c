@@ -6,7 +6,7 @@
 /*   By: fmotte <fmotte@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/05 12:36:23 by cpollock          #+#    #+#             */
-/*   Updated: 2025/12/08 14:57:10 by fmotte           ###   ########.fr       */
+/*   Updated: 2025/12/09 13:03:36 by fmotte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static void	minimap_walls(t_game *data, int unit_len, int map_x, int map_y)
 			wall_rect.y = map_y + (j * wall_rect.height);
 			if ((data->map)[i][j] == '1')
 				draw_rectangle(data, wall_rect, 0x101010);
-			else if ((data->map)[i][j] == '0')
+			else if ((data->map)[i][j] == '0' || (data->map)[i][j] == ' ')
 				draw_rectangle(data, wall_rect, 0xDDDDDD);
 			j++;
 		}

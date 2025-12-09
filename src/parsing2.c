@@ -6,7 +6,7 @@
 /*   By: fmotte <fmotte@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 15:12:29 by fmotte            #+#    #+#             */
-/*   Updated: 2025/12/08 15:15:38 by fmotte           ###   ########.fr       */
+/*   Updated: 2025/12/09 13:35:57 by fmotte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ int	check_extension(char *name_map, char *extention)
 
 	len_map = ft_strlen(name_map);
 	len_ext = ft_strlen(extention);
-	;
 	j = 0;
 	while (len_map - j > 0 && len_ext > j)
 	{
@@ -30,7 +29,7 @@ int	check_extension(char *name_map, char *extention)
 	}
 	if (name_map[len_map - j] == extention[0])
 		return (1);
-	printf("Wrong extention. Can't open file %s\n", name_map);
+	printf("Error\nWrong extention. Can't open file %s\n", name_map);
 	return (0);
 }
 

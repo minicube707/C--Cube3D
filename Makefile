@@ -6,7 +6,7 @@
 #    By: fmotte <fmotte@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/28 11:37:49 by cpollock          #+#    #+#              #
-#    Updated: 2025/12/08 15:45:00 by fmotte           ###   ########.fr        #
+#    Updated: 2025/12/09 13:50:48 by fmotte           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,6 +37,7 @@ FILE_NAMES = 	angle_math \
 				dtrig \
 				ft_realloc \
 				ft_split \
+				ft_transpose \
 				key_events \
 				loop_event \
 				main \
