@@ -1,0 +1,10 @@
+sprite_animation_west_01.xpm
+sprite_animation_west_02.xpm
+sprite_animation_west_03.xpm
+sprite_animation_west_04.xpm
+sprite_animation_west_05.xpm
+sprite_animation_west_06.xpm
+sprite_animation_west_07.xpm
+sprite_animation_west_08.xpm
+sprite_animation_west_09.xpm
+sprite_animation_west_10.xpm
