@@ -31,6 +31,7 @@ FILE_NAMES = 	angle_math \
 				check_map_path \
 				check_texture \
 				collision_check \
+				door_check \
 				draw_arrow \
 				draw_basic \
 				draw_minimap \
@@ -38,6 +39,7 @@ FILE_NAMES = 	angle_math \
 				ft_realloc \
 				ft_split \
 				ft_transpose \
+				is_raycast_hztl \
 				key_events \
 				loop_event \
 				main \

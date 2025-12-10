@@ -84,6 +84,7 @@ typedef struct s_player
 	bool			key_turn_l;
 	bool			key_turn_r;
 	bool			key_sprint;
+	bool			key_space_pressed;
 
 	double			box_width;
 	double			walk_spd;
@@ -213,6 +214,9 @@ void				init_player(t_player *player);
 void				move_player(t_game *data, t_player *player);
 void				turn_player(t_player *player);
 
+/*Door check*/
+void				door_check(t_game *data, t_player *player);
+
 /*Player collision*/
 void				move_collision(t_game *data, t_player *player, double x_spd,
 						double y_spd);
@@ -243,6 +247,7 @@ void				draw_minimap(t_game *data);
 
 /*Angle_Math*/
 double				deg2rad(double angle);
+double				rad2deg(double angle);
 double				angle_limit(double angle);
 
 /*Dtrig*/
@@ -265,11 +270,16 @@ void				vect_add(t_vector *dest, t_vector src, double angle,
 /*========================*/
 
 /*Raycast*/
-int					raycast(t_game *data, t_vector *ray_vect, double angle);
+int					raycast(t_game *data, t_vector *ray_vect, double angle,
+						bool prec);
+bool				is_raycast_hztl(t_game *data, t_vector hztl, t_vector vtcl,
+						bool prec);
 
 /*Collision*/
 bool				vect_in_wall(t_game *data, t_vector point);
 bool				player_in_wall(t_game *data, t_player player);
+char				vect_get_tile(t_game *data, t_vector point);
+void				vect_to_mapcoord(t_vector point, t_coord *map_coord);
 
 /*===================*/
 /*=======EVENT=======*/

@@ -28,6 +28,8 @@ int	key_press(int key, t_game *data)
 		data->player.key_turn_r = true;
 	if (key == LSHIFT)
 		data->player.key_sprint = true;
+	if (key == SPACE)
+		data->player.key_space_pressed = true;
 	if (key == M)
 		data->minimap = !data->minimap;
 	return (0);

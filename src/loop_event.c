@@ -27,6 +27,9 @@ int	loop_event(t_game *data)
 	{
 		data->time_frame.tv_sec = time_check.tv_sec;
 		data->time_frame.tv_usec = time_check.tv_usec;
+		if (data->player.key_space_pressed)
+			door_check(data, &data->player);
+		data->player.key_space_pressed = false;
 		turn_player(&data->player);
 		move_player(data, &data->player);
 		raycast_test(data, 0x0000FF);
@@ -47,7 +50,7 @@ static void	raycast_test(t_game *data, int color)
 	ray_angle = data->player.direction - (data->player.fov / 2);
 	while (i < W_WIDTH)
 	{
-		wall_side = raycast(data, &ray_vect, angle_limit(ray_angle));
+		wall_side = raycast(data, &ray_vect, angle_limit(ray_angle), true);
 		if (color != 0)
 		{
 			if (wall_side == 1)
@@ -58,6 +61,8 @@ static void	raycast_test(t_game *data, int color)
 				color = 0x0066FF;
 			if (wall_side == 4)
 				color = 0x0044AA;
+			if (vect_get_tile(data, ray_vect) == 'D')
+				color = 0xFF0280;
 		}
 		double dist = vect_dist(data->player.pos, ray_vect);
 		dist = fix_dist(dist, data->player.direction, ray_angle);

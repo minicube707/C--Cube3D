@@ -17,15 +17,14 @@ static void	set_ray_hztl(t_game *data, t_vector *ray_vect, double angle);
 static void	raycast_vtcl(t_game *data, t_vector *ray_vect, double angle);
 static void	set_ray_vtcl(t_game *data, t_vector *ray_vect, double angle);
 
-int	raycast(t_game *data, t_vector *ray_vect, double angle)
+int	raycast(t_game *data, t_vector *ray_vect, double angle, bool prec)
 {
 	t_vector	ray_hztl;
 	t_vector	ray_vtcl;
 
 	raycast_hztl(data, &ray_hztl, angle);
 	raycast_vtcl(data, &ray_vtcl, angle);
-	if (vect_dist(data->player.pos, ray_hztl)
-		<= vect_dist(data->player.pos, ray_vtcl))
+	if (is_raycast_hztl(data, ray_hztl, ray_vtcl, prec))
 	{
 		ray_vect->x = ray_hztl.x;
 		ray_vect->y = ray_hztl.y;

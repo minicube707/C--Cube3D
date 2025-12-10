@@ -57,9 +57,9 @@ static void	minimap_walls(t_game *data, int unit_len, int map_x, int map_y)
 		{
 			wall_rect.x = map_x + (i * wall_rect.width);
 			wall_rect.y = map_y + ((j - skip_rows) * wall_rect.height);
-			if ((data->map)[i][j] == '1')
+			if ((data->map)[i][j] == '1' || (data->map)[i][j] == 'D')
 				draw_rectangle(data, wall_rect, 0x101010);
-			else if ((data->map)[i][j] == '0' || (data->map)[i][j] == ' ')
+			else
 				draw_rectangle(data, wall_rect, 0xDDDDDD);
 			j++;
 		}

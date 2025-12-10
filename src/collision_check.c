@@ -14,14 +14,10 @@
 
 bool	vect_in_wall(t_game *data, t_vector point)
 {
-	int	check_x;
-	int	check_y;
+	char	tile;
 
-	check_x = (int)floor(point.x / TILE_LEN);
-	check_y = (int)floor(point.y / TILE_LEN);
-	if ((check_x < 0 || check_x >= data->map_width)
-		|| (check_y < 0 || check_y >= data->map_height)
-		|| (data->map)[check_x][check_y] == '1')
+	tile = vect_get_tile(data, point);
+	if (tile == 0 || tile == '1' || tile == 'D')
 		return (true);
 	return (false);
 }
@@ -44,4 +40,21 @@ bool	player_in_wall(t_game *data, t_player player)
 	if (vect_in_wall(data, check_vect))
 		return (true);
 	return (false);
+}
+
+char	vect_get_tile(t_game *data, t_vector point)
+{
+	t_coord	check_coord;
+
+	vect_to_mapcoord(point, &check_coord);
+	if ((check_coord.x < 0 || check_coord.x >= data->map_width)
+		|| (check_coord.y < 0 || check_coord.y >= data->map_height))
+		return (0);
+	return ((data->map)[check_coord.x][check_coord.y]);
+}
+
+void	vect_to_mapcoord(t_vector point, t_coord *map_coord)
+{
+	map_coord->x = (int)floor(point.x / TILE_LEN);
+	map_coord->y = (int)floor(point.y / TILE_LEN);
 }
