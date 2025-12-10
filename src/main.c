@@ -6,7 +6,7 @@
 /*   By: fmotte <fmotte@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 11:12:30 by cpollock          #+#    #+#             */
-/*   Updated: 2025/12/09 15:48:23 by fmotte           ###   ########.fr       */
+/*   Updated: 2025/12/10 15:28:08 by fmotte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,7 @@ int	main(int argc, char **argv)
 	t_game	data;
 
 	if (argc != 2)
-	{
-		printf("Error\nWrong number of argument\n");
-		return (1);
-	}
+		return (ft_perror("Wrong number of argument\n"));
 	if (parsing(argv[1], &data))
 		return (0);
 	if (!init_game(&data))

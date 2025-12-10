@@ -6,7 +6,7 @@
 /*   By: fmotte <fmotte@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 10:51:40 by cpollock          #+#    #+#             */
-/*   Updated: 2025/12/09 15:48:37 by fmotte           ###   ########.fr       */
+/*   Updated: 2025/12/10 17:01:12 by fmotte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,6 +143,9 @@ char				*ft_strdup(const char *src);
 /*Mini_Libf2*/
 char				*skip_white_space(char *string);
 char				*ft_substr(char const *s, unsigned int start, size_t len);
+int 				ft_perror(char *string);
+void				*ft_bzero(void *ptr, size_t num);
+size_t				ft_strlcat(char *dst, const char *src, size_t size);
 
 /*Ft_Realloc*/
 char				**ft_realloc(char **tab, char *string);
@@ -187,7 +190,7 @@ int					clear_map(t_stack *stack_wall, t_stack **stack_path,
 int					check_colour(char **tab_col, t_game *data);
 
 /*Checking Texture*/
-int					chec_texture(char **tab_tex);
+int					check_texture(char **tab_tex);
 
 /*===================*/
 /*======Parsing======*/

@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fmotte <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: fmotte <fmotte@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 11:47:16 by fmotte            #+#    #+#             */
-/*   Updated: 2025/05/14 16:52:50 by fmotte           ###   ########.fr       */
+/*   Updated: 2025/12/10 17:02:04 by fmotte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-
+# include <stdio.h>
 char	*ft_strncpy(char *dest, const char *src, unsigned int n)
 {
 	unsigned int	i;

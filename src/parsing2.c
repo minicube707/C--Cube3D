@@ -6,7 +6,7 @@
 /*   By: fmotte <fmotte@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 15:12:29 by fmotte            #+#    #+#             */
-/*   Updated: 2025/12/09 13:35:57 by fmotte           ###   ########.fr       */
+/*   Updated: 2025/12/10 15:31:27 by fmotte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	fill_colour_texture(char *string, char ***tab_col)
 	tmp = skip_white_space(string);
 	free(string);
 	if (tmp == NULL)
-		return (1);
+		return (ft_perror("Probleme allocation dynamique\n"));
 	*tab_col = ft_realloc(*tab_col, tmp);
 	return (0);
 }
@@ -61,23 +61,20 @@ int	fill_information(char *string, char ***tab_tex, char ***tab_col)
 	char	*tmp;
 
 	tmp = skip_white_space(string);
+	if (tmp == NULL)
+		return (ft_perror("Probleme allocation dynamique\n"));
 	free(string);
-	if (tmp[0] == '\0')
-	{
-		free(tmp);
-		return (0);
-	}
-	if (ft_strncmp(tmp, "NO", 2) == 0)
+	if (tmp[0] != '\0' && ft_strncmp(tmp, "NO", 2) == 0)
 		return (fill_colour_texture(tmp, tab_tex));
-	else if (ft_strncmp(tmp, "SO", 2) == 0)
+	else if (tmp[0] != '\0' && ft_strncmp(tmp, "SO", 2) == 0)
 		return (fill_colour_texture(tmp, tab_tex));
-	else if (ft_strncmp(tmp, "WE", 2) == 0)
+	else if (tmp[0] != '\0' && ft_strncmp(tmp, "WE", 2) == 0)
 		return (fill_colour_texture(tmp, tab_tex));
-	else if (ft_strncmp(tmp, "EA", 2) == 0)
+	else if (tmp[0] != '\0' && ft_strncmp(tmp, "EA", 2) == 0)
 		return (fill_colour_texture(tmp, tab_tex));
-	else if (ft_strncmp(tmp, "F", 1) == 0)
+	else if (tmp[0] != '\0' && ft_strncmp(tmp, "F", 1) == 0)
 		return (fill_colour_texture(tmp, tab_col));
-	else if (ft_strncmp(tmp, "C", 1) == 0)
+	else if (tmp[0] != '\0' && ft_strncmp(tmp, "C", 1) == 0)
 		return (fill_colour_texture(tmp, tab_col));
 	free(tmp);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: fmotte <fmotte@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 14:58:28 by fmotte            #+#    #+#             */
-/*   Updated: 2025/12/09 15:49:38 by fmotte           ###   ########.fr       */
+/*   Updated: 2025/12/10 15:30:40 by fmotte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,25 +15,13 @@
 int	check_data(char **tab_map, char **tab_tex, char **tab_col, t_game *data)
 {
 	if (tab_map == NULL || tab_tex == NULL || tab_col == NULL)
-	{
-		printf("Error\nKO Instruction\n");
-		return (1);
-	}
+		return (ft_perror("KO Instruction\n"));
 	if (check_map(tab_map))
-	{
-		printf("Error\nKO Map\n");
-		return (1);
-	}
+		return (ft_perror("KO Map\n"));
 	if (check_colour(tab_col, data))
-	{
-		printf("Error\nKO Colour\n");
-		return (1);
-	}
-	if (chec_texture(tab_tex))
-	{
-		printf("Error\nKO Texture\n");
-		return (1);
-	}
+		return (ft_perror("KO Colour\n"));
+	if (check_texture(tab_tex))
+		return (ft_perror("KO Texture\n"));
 	return (0);
 }
 
