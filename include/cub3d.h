@@ -35,6 +35,9 @@
 
 # define TILE_LEN 64
 
+# define FPS 60
+# define ANIM_MS 1500
+
 # define ESC 65307
 # define W 119
 # define A 97
@@ -70,6 +73,31 @@ typedef struct s_arrow
 	double			height;
 	double			angle;
 }					t_arrow;
+
+typedef struct s_img
+{
+	int				img_width;
+	int				img_height;
+	void			*sprite;
+	char			*addr;
+	int				bbp;
+	int				line_len;
+	int				endian;
+}					t_img;
+
+typedef struct s_imgtextures
+{
+	int				frames_north;
+	t_img			*wall_north;
+	int				frames_south;
+	t_img			*wall_south;
+	int				frames_east;
+	t_img			*wall_east;
+	int				frames_west;
+	t_img			*wall_west;
+	int				frames_door;
+	t_img			*wall_door;
+}					t_imgtextures;
 
 typedef struct s_player
 {
@@ -107,13 +135,29 @@ typedef struct s_game
 	int				map_width;
 	int				map_height;
 
+	t_imgtextures	wall_imgs;
+
 	int				col_ceil;
 	int				col_floor;
 
 	bool			minimap;
 
-	struct timeval	time_frame;
+	struct timeval	time_fps;
+	double			ms_fps;
+	struct timeval	time_anim;
+	double			ms_anim;
 }					t_game;
+
+typedef struct s_raydata
+{
+	t_vector		vect;
+	int				wall_side;
+	double			angle;
+	double			dist;
+	double			height;
+	int				start_y;
+	int				end;
+}					t_raydata;
 
 typedef struct s_coord
 {
@@ -241,6 +285,10 @@ void				draw_arrow(t_game *data, t_arrow arrow, int color);
 /*Draw_Minimap*/
 void				draw_minimap(t_game *data);
 
+/*Raycast rendering*/
+void				render_raycast(t_game *data, t_player player);
+t_img				*render_get_img(t_game *data, t_raydata *ray);
+
 /*===================*/
 /*===MATHEMATIQUES===*/
 /*===================*/
@@ -281,6 +329,16 @@ bool				player_in_wall(t_game *data, t_player player);
 char				vect_get_tile(t_game *data, t_vector point);
 void				vect_to_mapcoord(t_vector point, t_coord *map_coord);
 
+/*======================*/
+/*=======TEXTURES=======*/
+/*======================*/
+
+/*Initialise images*/
+bool				init_imgs(t_game *data, t_imgtextures *imgs);
+
+/*Texture reading*/
+unsigned int		get_img_pixel_col(t_img *img, int x, int y);
+
 /*===================*/
 /*=======EVENT=======*/
 /*===================*/
@@ -288,9 +346,18 @@ void				vect_to_mapcoord(t_vector point, t_coord *map_coord);
 /*Key Events*/
 int					key_press(int key, t_game *data);
 int					key_release(int key, t_game *data);
-int					kill_game(t_game *data);
 
 /*Loop_Event*/
 int					loop_event(t_game *data);
+
+/*Timing*/
+double				add_timer_ms(struct timeval *time_src);
+
+/*=====================*/
+/*=======DESTROY=======*/
+/*=====================*/
+
+/*Free mlx structure*/
+int					kill_game(t_game *data);
 
 #endif

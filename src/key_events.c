@@ -55,14 +55,3 @@ int	key_release(int key, t_game *data)
 		kill_game(data);
 	return (0);
 }
-
-int	kill_game(t_game *data)
-{
-	mlx_destroy_window(data->mlx, data->win);
-	mlx_destroy_image(data->mlx, data->img);
-	mlx_destroy_display(data->mlx);
-	free(data->mlx);
-	tab_char_clear(data->map);
-	exit(0);
-	return (0);
-}

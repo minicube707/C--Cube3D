@@ -24,6 +24,7 @@ CFLAGS = -Wall -Wextra -Werror -MMD -MP -g
 #              FILE
 # =======================================
 FILE_NAMES = 	angle_math \
+				add_timer_ms \
 				check_colour \
 				check_map2 \
 				check_map \
@@ -39,8 +40,10 @@ FILE_NAMES = 	angle_math \
 				ft_realloc \
 				ft_split \
 				ft_transpose \
+				init_imgs \
 				is_raycast_hztl \
 				key_events \
+				kill_game \
 				loop_event \
 				main \
 				mini_libft2 \
@@ -51,8 +54,11 @@ FILE_NAMES = 	angle_math \
 				player_collision \
 				point_math \
 				raycast \
+				render_get_img \
+				render \
 				stack \
 				tab_utils \
+				texture_read \
 				vect_math
 
 # =======================================

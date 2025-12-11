@@ -20,7 +20,7 @@ int	main(int argc, char **argv)
 
 	if (argc != 2)
 	{
-		printf("Error\nWrong number of argument\n");
+		printf("Error\nWrong number of arguments\n");
 		return (1);
 	}
 	if (parsing(argv[1], &data))
@@ -50,6 +50,7 @@ static bool	init_game(t_game *data)
 	if (data->win == NULL)
 		return (free(data->mlx), false);
 	data->minimap = false;
-	gettimeofday(&data->time_frame, NULL);
+	gettimeofday(&data->time_fps, NULL);
+	init_imgs(data, &(data->wall_imgs));
 	return (true);
 }
