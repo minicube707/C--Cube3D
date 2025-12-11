@@ -37,8 +37,8 @@ int	raycast(t_game *data, t_vector *ray_vect, double angle, bool prec)
 		ray_vect->x = ray_vtcl.x;
 		ray_vect->y = ray_vtcl.y;
 		if (ray_vect->x > data->player.pos.x)
-			return (3);
-		return (4);
+			return (4);
+		return (3);
 	}
 }
 
