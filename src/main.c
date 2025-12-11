@@ -51,6 +51,9 @@ static bool	init_game(t_game *data)
 		return (free(data->mlx), false);
 	data->minimap = false;
 	gettimeofday(&data->time_fps, NULL);
+	gettimeofday(&data->time_anim, NULL);
+	data->ms_fps = 0;
+	data->ms_anim = 0;
 	init_imgs(data, &(data->wall_imgs));
 	return (true);
 }

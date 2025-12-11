@@ -20,7 +20,8 @@ bool	init_imgs(t_game *data, t_imgtextures *imgs)
 	char	*southtest[2] = {"./textures/Wall_Sud.xpm", NULL};
 	char	*easttest[2] = {"./textures/Wall_Est.xpm", NULL};
 	char	*westtest[2] = {"./textures/Wall_Wouest.xpm", NULL};
-	char	*doortest[2] = {"./textures/Wall_Door.xpm", NULL};
+	char	*doortest[5] = {"./textures/Wall_Door.xpm", "./textures/Wall_Nord.xpm",
+							"./textures/Wall_Door.xpm", "./textures/Wall_Sud.xpm", NULL};
 
 	set_imgs(data, &(imgs->wall_north), &(imgs->frames_north), northtest);
 	set_imgs(data, &(imgs->wall_south), &(imgs->frames_south), southtest);
@@ -43,12 +44,12 @@ static bool	set_imgs(t_game *data, t_img **img, int *frames, char **files)
 	i = 0;
 	while (i < *frames)
 	{
-		(*img[i]).img_width = 64;
-		(*img[i]).img_height = 64;
-		(*img[i]).sprite = mlx_xpm_file_to_image(data->mlx, files[i],
-				&((*img[i]).img_width), &((*img[i]).img_height));
-		(*img[i]).addr = mlx_get_data_addr((*img[i]).sprite, &(*img[i]).bbp,
-				&(*img[i]).line_len, &(*img[i]).endian);
+		((*img)[i]).img_width = 64;
+		((*img)[i]).img_height = 64;
+		((*img)[i]).sprite = mlx_xpm_file_to_image(data->mlx, files[i],
+				&(((*img)[i]).img_width), &(((*img)[i]).img_height));
+		((*img)[i]).addr = mlx_get_data_addr(((*img)[i]).sprite, &((*img)[i]).bbp,
+				&((*img)[i]).line_len, &((*img)[i]).endian);
 		i++;
 	}
 	return (true);

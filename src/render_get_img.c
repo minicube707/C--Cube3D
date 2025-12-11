@@ -50,6 +50,7 @@ static int	render_get_anim_index(t_game *data, t_raydata *ray)
 		frame_count = data->wall_imgs.frames_east;
 	else if (ray->wall_side == 4)
 		frame_count = data->wall_imgs.frames_west;
-	frame_at = (((int)data->ms_anim * frame_count) % ANIM_MS) / ANIM_MS;
+	frame_at = ((int)data->ms_anim * frame_count) / ANIM_MS;
+	frame_at = frame_at % frame_count;
 	return (frame_at);
 }

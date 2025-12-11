@@ -39,6 +39,6 @@ static void	kill_images(t_game *data, t_img **img, int frames)
 
 	i = 0;
 	while (i < frames)
-		mlx_destroy_image(data->mlx, img[i++]->sprite);
+		mlx_destroy_image(data->mlx, (*img)[i++].sprite);
 	free(*img);
 }
