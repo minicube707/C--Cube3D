@@ -6,7 +6,7 @@
 /*   By: fmotte <fmotte@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/04 14:21:55 by cpollock          #+#    #+#             */
-/*   Updated: 2025/12/11 18:04:24 by fmotte           ###   ########.fr       */
+/*   Updated: 2025/12/11 18:48:04 by fmotte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ int	key_press(int key, t_game *data)
 		data->player.key_turn_r = true;
 	if (key == LSHIFT)
 		data->player.key_sprint = true;
+	if (key == SPACE)
+		data->player.key_space_pressed = true;
 	if (key == M)
 		data->minimap = !data->minimap;
 	return (0);
@@ -51,16 +53,5 @@ int	key_release(int key, t_game *data)
 		data->player.key_sprint = false;
 	if (key == ESC)
 		kill_game(data);
-	return (0);
-}
-
-int	kill_game(t_game *data)
-{
-	mlx_destroy_window(data->mlx, data->win);
-	mlx_destroy_image(data->mlx, data->img);
-	mlx_destroy_display(data->mlx);
-	free(data->mlx);
-	tab_char_clear(data->map);
-	clear_texture(data);
 	return (0);
 }

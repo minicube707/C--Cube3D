@@ -6,7 +6,7 @@
 /*   By: fmotte <fmotte@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 11:12:30 by cpollock          #+#    #+#             */
-/*   Updated: 2025/12/11 18:05:27 by fmotte           ###   ########.fr       */
+/*   Updated: 2025/12/11 18:46:31 by fmotte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,10 @@ static bool	init_game(t_game *data)
 	if (data->win == NULL)
 		return (free(data->mlx), false);
 	data->minimap = false;
-	gettimeofday(&data->time_frame, NULL);
+	gettimeofday(&data->time_fps, NULL);
+	gettimeofday(&data->time_anim, NULL);
+	data->ms_fps = 0;
+	data->ms_anim = 0;
+	init_imgs(data, &(data->wall_imgs));
 	return (true);
 }

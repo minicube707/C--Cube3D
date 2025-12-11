@@ -17,6 +17,11 @@ double	deg2rad(double angle)
 	return (fmod(angle * (PI / 180), PI * 2));
 }
 
+double	rad2deg(double angle)
+{
+	return (fmod(angle * (180 / PI), 360));
+}
+
 double	angle_limit(double angle)
 {
 	if (angle >= 0)
