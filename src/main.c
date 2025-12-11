@@ -6,7 +6,7 @@
 /*   By: fmotte <fmotte@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 11:12:30 by cpollock          #+#    #+#             */
-/*   Updated: 2025/12/11 18:46:31 by fmotte           ###   ########.fr       */
+/*   Updated: 2025/12/11 18:54:06 by fmotte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,6 @@ int	main(int argc, char **argv)
 	if (!init_game(&data))
 		return (1);
 	print_texture(&data);
-	kill_game(&data);
-	return(0);
 	init_player(&data.player);
 	mlx_hook(data.win, DestroyNotify, StructureNotifyMask, &kill_game, &data);
 	mlx_hook(data.win, KeyPress, KeyPressMask, &key_press, &data);
