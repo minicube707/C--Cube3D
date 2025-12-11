@@ -6,7 +6,7 @@
 #    By: fmotte <fmotte@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/28 11:37:49 by cpollock          #+#    #+#              #
-#    Updated: 2025/12/11 18:28:58 by fmotte           ###   ########.fr        #
+#    Updated: 2025/12/11 20:00:48 by fmotte           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,60 +23,67 @@ CFLAGS = -Wall -Wextra -MMD -MP -g
 # =======================================
 #              FILE
 # =======================================
-FILE_NAMES = 	angle_math \
-				add_timer_ms \
-				check_colour \
-				check_map2 \
-				check_map \
-				check_map_path2 \
-				check_map_path \
-				check_texture \
-				check_texture2 \
-				collision_check \
-				door_check \
-				draw_arrow \
-				draw_basic \
-				draw_minimap \
-				dtrig \
-				ft_realloc \
-				ft_split \
-				ft_transpose \
-				init_imgs \
-				is_raycast_hztl \
-				key_events \
-				kill_game \
-				loop_event \
-				main \
-				mini_libft2 \
-				mini_libft3 \
-				mini_libft \
-				parsing3 \
-				parsing2 \
-				parsing \
-				player \
-				player_collision \
-				point_math \
-				raycast \
-				render_get_img \
-				render \
-				stack \
-				tab_utils \
-				texture_read \
-				vect_math
+FILE_NAMES_GRAPHIC = 	angle_math \
+						add_timer_ms \
+						collision_check \
+						door_check \
+						draw_arrow \
+						draw_basic \
+						draw_minimap \
+						dtrig \
+						init_imgs \
+						is_raycast_hztl \
+						key_events \
+						kill_game \
+						loop_event \
+						main \
+						player \
+						player_collision \
+						point_math \
+						raycast \
+						render_get_img \
+						render \
+						texture_read \
+						vect_math
 
+FILE_NAMES_PARSING = 	check_colour \
+						check_map2 \
+						check_map \
+						check_map_path2 \
+						check_map_path \
+						check_texture \
+						check_texture2 \
+						ft_realloc \
+						ft_split \
+						ft_transpose \
+						mini_libft2 \
+						mini_libft3 \
+						mini_libft \
+						parsing3 \
+						parsing2 \
+						parsing \
+						stack \
+						tab_utils
+				
 # =======================================
 #              VARIABLE
-# =======================================	
+# =======================================
+FILE_NAMES = $(FILE_NAMES_GRAPHIC)	$(FILE_NAMES_PARSING)	
 SRC_PATH = src
 OBJ_PATH = obj
 HEA_PATH = include
 
-SRC_FILES = $(FILE_NAMES:%=$(SRC_PATH)/%.c)
+
+# Construire les chemins SRC automatiquement
+SRC_GRAPHIC = $(FILE_NAMES_GRAPHIC:%=$(SRC_PATH)/graphic/%.c)
+SRC_PARSING = $(FILE_NAMES_PARSING:%=$(SRC_PATH)/parsing/%.c)
+
+SRC_FILES = $(SRC_GRAPHIC) $(SRC_PARSING)
 OBJ_FILES = $(FILE_NAMES:%=$(OBJ_PATH)/%.o)
 DEP_FILES = $(OBJ_FILES:.o=.d)
 HEA_FILES = $(HEA_PATH)/cub3d.h
 
-INCLUDE = -I $(HEA_PATH) -I gnl/include
+INCLUDE = -I $(HEA_PATH) -I gnl/include -I/usr/include -Imlx
 ARCHIVE =  -L gnl -l gnl
 
 MLX_GIT = https://github.com/42Paris/minilibx-linux.git
@@ -85,6 +92,16 @@ MLX_HEAD = $(MLX_PATH)/mlx.h
 
 NAME = cub3d
 
+
+# =======================================
+#              COMPILATION
+# =======================================
+$(OBJ_PATH)/%.o: $(SRC_PATH)/graphic/%.c $(HEA_FILES) | $(OBJ_PATH) $(MLX_HEAD)
+	$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
+
+$(OBJ_PATH)/%.o: $(SRC_PATH)/parsing/%.c $(HEA_FILES) | $(OBJ_PATH) $(MLX_HEAD)
+	$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
+	
 # =======================================
 #              RULES
 # =======================================
@@ -100,9 +117,6 @@ $(OBJ_PATH) :
 $(NAME): $(OBJ_FILES) $(MLX_HEAD)
 	@$(MAKE) -s -C gnl
 	$(CC) $(CFLAGS) $(OBJ_FILES) $(ARCHIVE) -Lmlx -lmlx -L/usr/lib -Imlx -lXext -lX11 -lm -lz -o $(NAME)
-
-$(OBJ_PATH)/%.o: $(SRC_PATH)/%.c $(HEA_FILES) | $(OBJ_PATH) $(MLX_HEAD)
-	$(CC) $(CFLAGS) $(INCLUDE)  -I/usr/include -Imlx -O3 -c $< -o $@
 
 $(MLX_HEAD):
 	git clone $(MLX_GIT) $(MLX_PATH)
