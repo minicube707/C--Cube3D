@@ -6,7 +6,7 @@
 /*   By: fmotte <fmotte@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/04 14:21:55 by cpollock          #+#    #+#             */
-/*   Updated: 2025/12/08 15:44:15 by fmotte           ###   ########.fr       */
+/*   Updated: 2025/12/11 18:04:24 by fmotte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,6 @@ int	kill_game(t_game *data)
 	mlx_destroy_display(data->mlx);
 	free(data->mlx);
 	tab_char_clear(data->map);
-	exit(0);
+	clear_texture(data);
 	return (0);
 }

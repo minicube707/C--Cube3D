@@ -6,7 +6,7 @@
 /*   By: fmotte <fmotte@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/03 16:16:52 by fmotte            #+#    #+#             */
-/*   Updated: 2025/12/10 17:00:46 by fmotte           ###   ########.fr       */
+/*   Updated: 2025/12/11 17:49:26 by fmotte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	return (p);
 }
 
-int ft_perror(char *string)
+int	ft_perror(char *string)
 {
 	write(2, "Error\n", 6);
 	write(2, string, ft_strlen(string));
@@ -66,10 +66,10 @@ void	*ft_bzero(void *ptr, size_t num)
 	unsigned char	*p;
 
 	i = 0;
-	p = (unsigned char *) ptr;
+	p = (unsigned char *)ptr;
 	while (i < num)
 	{
-		p[i] = (unsigned char) 0;
+		p[i] = (unsigned char)0;
 		i++;
 	}
 	return (ptr);

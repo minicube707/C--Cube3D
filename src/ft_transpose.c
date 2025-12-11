@@ -6,7 +6,7 @@
 /*   By: fmotte <fmotte@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 13:37:24 by fmotte            #+#    #+#             */
-/*   Updated: 2025/12/09 14:03:12 by fmotte           ###   ########.fr       */
+/*   Updated: 2025/12/11 18:18:50 by fmotte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,7 @@ static int	ft_transpose_init(char **tab_map, int *height, int *width,
 	*width = get_width_map(tab_map);
 	*new_tab = malloc(sizeof(char *) * ((*width) + 1));
 	if (*new_tab == NULL)
-	{
-		tab_char_clear(tab_map);
 		return (1);
-	}
 	return (0);
 }
 

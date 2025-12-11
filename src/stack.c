@@ -6,7 +6,7 @@
 /*   By: fmotte <fmotte@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/06 23:10:55 by florent           #+#    #+#             */
-/*   Updated: 2025/12/10 15:31:52 by fmotte           ###   ########.fr       */
+/*   Updated: 2025/12/11 18:43:10 by fmotte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ t_stack	*push_stack(t_stack *st, int x, int y)
 		return (NULL);
 	}
 	coord = malloc(sizeof(t_coord));
-	if (element == NULL)
+	if (coord == NULL)
 	{
 		clear_stack(st);
 		ft_perror("Probleme allocation dynamique\n");
