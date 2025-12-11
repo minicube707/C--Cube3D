@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   kill_game.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpollock <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: fmotte <fmotte@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 13:45:42 by cpollock          #+#    #+#             */
-/*   Updated: 2025/12/10 13:45:44 by cpollock         ###   ########.fr       */
+/*   Updated: 2025/12/11 18:48:13 by fmotte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int	kill_game(t_game *data)
 	mlx_destroy_display(data->mlx);
 	free(data->mlx);
 	tab_char_clear(data->map);
+	clear_texture(data);
 	exit(0);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: fmotte <fmotte@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 15:12:29 by fmotte            #+#    #+#             */
-/*   Updated: 2025/12/09 13:35:57 by fmotte           ###   ########.fr       */
+/*   Updated: 2025/12/11 18:37:45 by fmotte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ int	check_extension(char *name_map, char *extention)
 	}
 	if (name_map[len_map - j] == extention[0])
 		return (1);
-	printf("Error\nWrong extention. Can't open file %s\n", name_map);
 	return (0);
 }
 
@@ -62,22 +61,19 @@ int	fill_information(char *string, char ***tab_tex, char ***tab_col)
 
 	tmp = skip_white_space(string);
 	free(string);
-	if (tmp[0] == '\0')
-	{
-		free(tmp);
-		return (0);
-	}
-	if (ft_strncmp(tmp, "NO", 2) == 0)
+	if (tmp == NULL)
+		return (1);
+	if (tmp[0] != '\0' && ft_strncmp(tmp, "NO", 2) == 0)
 		return (fill_colour_texture(tmp, tab_tex));
-	else if (ft_strncmp(tmp, "SO", 2) == 0)
+	else if (tmp[0] != '\0' && ft_strncmp(tmp, "SO", 2) == 0)
 		return (fill_colour_texture(tmp, tab_tex));
-	else if (ft_strncmp(tmp, "WE", 2) == 0)
+	else if (tmp[0] != '\0' && ft_strncmp(tmp, "WE", 2) == 0)
 		return (fill_colour_texture(tmp, tab_tex));
-	else if (ft_strncmp(tmp, "EA", 2) == 0)
+	else if (tmp[0] != '\0' && ft_strncmp(tmp, "EA", 2) == 0)
 		return (fill_colour_texture(tmp, tab_tex));
-	else if (ft_strncmp(tmp, "F", 1) == 0)
+	else if (tmp[0] != '\0' && ft_strncmp(tmp, "F", 1) == 0)
 		return (fill_colour_texture(tmp, tab_col));
-	else if (ft_strncmp(tmp, "C", 1) == 0)
+	else if (tmp[0] != '\0' && ft_strncmp(tmp, "C", 1) == 0)
 		return (fill_colour_texture(tmp, tab_col));
 	free(tmp);
 	return (0);

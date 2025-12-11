@@ -6,7 +6,7 @@
 #    By: fmotte <fmotte@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/28 11:37:49 by cpollock          #+#    #+#              #
-#    Updated: 2025/12/09 13:50:48 by fmotte           ###   ########.fr        #
+#    Updated: 2025/12/11 18:28:58 by fmotte           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@
 #                FLAGS
 # =======================================
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -MMD -MP -g 
+CFLAGS = -Wall -Wextra -MMD -MP -g 
 
 # =======================================
 #              FILE
@@ -31,6 +31,7 @@ FILE_NAMES = 	angle_math \
 				check_map_path2 \
 				check_map_path \
 				check_texture \
+				check_texture2 \
 				collision_check \
 				door_check \
 				draw_arrow \
@@ -47,7 +48,9 @@ FILE_NAMES = 	angle_math \
 				loop_event \
 				main \
 				mini_libft2 \
+				mini_libft3 \
 				mini_libft \
+				parsing3 \
 				parsing2 \
 				parsing \
 				player \

@@ -6,7 +6,7 @@
 /*   By: fmotte <fmotte@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/03 16:16:52 by fmotte            #+#    #+#             */
-/*   Updated: 2025/12/09 13:35:13 by fmotte           ###   ########.fr       */
+/*   Updated: 2025/12/11 17:49:26 by fmotte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,51 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	}
 	p[i] = 0;
 	return (p);
+}
+
+int	ft_perror(char *string)
+{
+	write(2, "Error\n", 6);
+	write(2, string, ft_strlen(string));
+	return (1);
+}
+
+void	*ft_bzero(void *ptr, size_t num)
+{
+	size_t			i;
+	unsigned char	*p;
+
+	i = 0;
+	p = (unsigned char *)ptr;
+	while (i < num)
+	{
+		p[i] = (unsigned char)0;
+		i++;
+	}
+	return (ptr);
+}
+
+size_t	ft_strlcat(char *dst, const char *src, size_t size)
+{
+	size_t	i;
+	size_t	len_dst;
+	size_t	len_src;
+
+	i = 0;
+	len_dst = 0;
+	len_src = 0;
+	while (dst[len_dst] != 0 && len_dst < size)
+		len_dst++;
+	while (src[len_src] != 0)
+		len_src++;
+	if (len_dst >= size)
+		return (size + len_src);
+	while ((len_dst + i + 1 < size) && src[i] != 0)
+	{
+		dst[len_dst + i] = src[i];
+		i++;
+	}
+	if (len_dst + i < size)
+		dst[len_dst + i] = 0;
+	return (len_dst + len_src);
 }
