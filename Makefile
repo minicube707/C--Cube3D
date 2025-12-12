@@ -6,7 +6,7 @@
 #    By: fmotte <fmotte@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/28 11:37:49 by cpollock          #+#    #+#              #
-#    Updated: 2025/12/11 20:04:34 by fmotte           ###   ########.fr        #
+#    Updated: 2025/12/12 15:54:00 by fmotte           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,21 +47,22 @@ FILE_NAMES_GRAPHIC = 	angle_math \
 						vect_math
 
 FILE_NAMES_PARSING = 	check_colour \
-						check_map2 \
 						check_map \
-						check_map_path2 \
+						check_map2 \
 						check_map_path \
+						check_map_path2 \
 						check_texture \
 						check_texture2 \
+						check_texture3 \
 						ft_realloc \
 						ft_split \
 						ft_transpose \
+						mini_libft \
 						mini_libft2 \
 						mini_libft3 \
-						mini_libft \
-						parsing3 \
-						parsing2 \
 						parsing \
+						parsing2 \
+						parsing3 \
 						stack \
 						tab_utils
 				
