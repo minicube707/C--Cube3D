@@ -6,7 +6,7 @@
 /*   By: fmotte <fmotte@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 14:48:29 by fmotte            #+#    #+#             */
-/*   Updated: 2025/12/12 16:57:10 by fmotte           ###   ########.fr       */
+/*   Updated: 2025/12/12 17:36:59 by fmotte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,15 @@ void	clear_texture(t_game *data)
 	tab_char_clear(data->texture.texture_south);
 	tab_char_clear(data->texture.texture_east);
 	tab_char_clear(data->texture.texture_west);
+	tab_char_clear(data->texture.texture_door);
 }
 
-static int	manage_data_utils_add_path(t_game *data, char *string, char *path, int i)
+static int	manage_data_utils_add_path(t_game *data, char *string, char *path,
+		int i)
 {
-	char *tmp;
-	char *tmp2;
-	
+	char	*tmp;
+	char	*tmp2;
+
 	if (path[ft_strlen(path)] != '/' && string[0] != '/')
 	{
 		tmp = ft_strjoin(path, "/");
@@ -42,10 +44,7 @@ static int	manage_data_utils_add_path(t_game *data, char *string, char *path, in
 	if (tmp2 == NULL)
 		return (ft_perror("Probleme allocation dynamique\n"));
 	if (texture_copy_info(data, tmp2, i))
-	{
-		free(tmp2);
 		return (ft_perror("Probleme allocation dynamique\n"));
-	}
 	return (0);
 }
 

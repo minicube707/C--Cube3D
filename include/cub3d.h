@@ -6,7 +6,7 @@
 /*   By: fmotte <fmotte@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 10:51:40 by cpollock          #+#    #+#             */
-/*   Updated: 2025/12/12 16:57:43 by fmotte           ###   ########.fr       */
+/*   Updated: 2025/12/12 17:08:13 by fmotte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,7 @@ typedef struct s_texture
 	char			**texture_south;
 	char			**texture_east;
 	char			**texture_west;
+	char			**texture_door;
 }				t_texture;
 
 typedef struct s_game

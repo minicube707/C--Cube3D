@@ -6,7 +6,7 @@
 /*   By: fmotte <fmotte@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/05 16:30:59 by fmotte            #+#    #+#             */
-/*   Updated: 2025/12/12 16:56:56 by fmotte           ###   ########.fr       */
+/*   Updated: 2025/12/12 17:36:52 by fmotte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ static void	init_texture(t_game *data)
 	data->texture.texture_south = NULL;
 	data->texture.texture_east = NULL;
 	data->texture.texture_west = NULL;
+	data->texture.texture_door = NULL;
 }
 
 static int	check_texture_path_utils(t_game *data, char *path, int i)
@@ -61,10 +62,7 @@ static int	check_texture_path(t_game *data, char *string, int i)
 	if (check_extension(path, ".xpm"))
 	{
 		if (texture_copy_info(data, path, i))
-		{
-			free(path);
 			return (ft_perror("Probleme allocation dynamique\n"));
-		}	
 		return (0);
 	}
 	return (check_texture_path_utils(data, path, i));
@@ -96,13 +94,13 @@ int	check_texture(char **tab_tex, t_game *data)
 	int		i;
 	int		j;
 
-	tab_string = "NOSOEAWE";
+	tab_string = "NOSOEAWEDO";
 	init_texture(data);
 	i = 0;
-	while (i < 4)
+	while (i < 5)
 	{
 		j = 0;
-		while (j < 4)
+		while (tab_tex[j] != NULL)
 		{
 			if (check_texture_utils(data, tab_string, tab_tex[j], i))
 			{

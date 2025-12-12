@@ -6,7 +6,7 @@
 /*   By: fmotte <fmotte@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 15:12:29 by fmotte            #+#    #+#             */
-/*   Updated: 2025/12/11 18:37:45 by fmotte           ###   ########.fr       */
+/*   Updated: 2025/12/12 17:09:44 by fmotte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,8 @@ int	fill_information(char *string, char ***tab_tex, char ***tab_col)
 	else if (tmp[0] != '\0' && ft_strncmp(tmp, "WE", 2) == 0)
 		return (fill_colour_texture(tmp, tab_tex));
 	else if (tmp[0] != '\0' && ft_strncmp(tmp, "EA", 2) == 0)
+		return (fill_colour_texture(tmp, tab_tex));
+	else if (tmp[0] != '\0' && ft_strncmp(tmp, "DO", 2) == 0)
 		return (fill_colour_texture(tmp, tab_tex));
 	else if (tmp[0] != '\0' && ft_strncmp(tmp, "F", 1) == 0)
 		return (fill_colour_texture(tmp, tab_col));
