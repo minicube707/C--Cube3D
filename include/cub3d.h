@@ -6,7 +6,7 @@
 /*   By: fmotte <fmotte@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 10:51:40 by cpollock          #+#    #+#             */
-/*   Updated: 2025/12/12 17:08:13 by fmotte           ###   ########.fr       */
+/*   Updated: 2025/12/12 17:38:45 by fmotte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,7 @@ typedef struct s_texture
 	char			**texture_east;
 	char			**texture_west;
 	char			**texture_door;
-}				t_texture;
+}					t_texture;
 
 typedef struct s_game
 {
@@ -250,13 +250,13 @@ int					check_colour(char **tab_col, t_game *data);
 /*Checking Texture*/
 int					check_texture(char **tab_tex, t_game *data);
 
-
 /*Checking Texture2*/
-int 				check_texture2(t_game *data, char *name_file, char *path, int i);
-void    			clear_texture(t_game *data);
+int					check_texture2(t_game *data, char *name_file, char *path,
+						int i);
+void				clear_texture(t_game *data);
 
 /*Checking Texture3*/
-int 				texture_copy_info(t_game *data, char *tmp, int i);
+int					texture_copy_info(t_game *data, char *tmp, int i);
 
 /*===================*/
 /*======Parsing======*/
