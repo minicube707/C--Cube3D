@@ -6,7 +6,7 @@
 /*   By: fmotte <fmotte@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 11:12:30 by cpollock          #+#    #+#             */
-/*   Updated: 2025/12/11 18:54:06 by fmotte           ###   ########.fr       */
+/*   Updated: 2025/12/12 17:33:49 by fmotte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ void	print_texture(t_game *data)
 	print_tab(data->texture.texture_south);
 	print_tab(data->texture.texture_east);
 	print_tab(data->texture.texture_west);
+	if (data->texture.texture_door != NULL)
+		print_tab(data->texture.texture_door);
 }
 
 int	main(int argc, char **argv)
