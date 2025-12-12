@@ -36,7 +36,7 @@
 # define TILE_LEN 64
 
 # define FPS 60
-# define ANIM_MS 1500
+# define ANIM_MS 1000
 
 # define ESC 65307
 # define W 119
@@ -119,12 +119,12 @@ typedef struct s_player
 	double			turn_spd;
 }					t_player;
 
-typedef struct	s_texture
+typedef struct s_texture
 {
-	char 		**texture_north;
-	char 		**texture_south;
-	char 		**texture_east;
-	char 		**texture_west;
+	char			**texture_north;
+	char			**texture_south;
+	char			**texture_east;
+	char			**texture_west;
 }				t_texture;
 
 typedef struct s_game
@@ -139,12 +139,11 @@ typedef struct s_game
 
 	t_player		player;
 	t_texture		texture;
-	
+	t_imgtextures	wall_imgs;
+
 	char			**map;
 	int				map_width;
 	int				map_height;
-
-	t_imgtextures	wall_imgs;
 
 	int				col_ceil;
 	int				col_floor;
@@ -202,7 +201,7 @@ void				*ft_bzero(void *ptr, size_t num);
 size_t				ft_strlcat(char *dst, const char *src, size_t size);
 
 /*Mini_Libf3*/
-int 				ft_is_visible(char *string);
+int					ft_is_visible(char *string);
 
 /*Ft_Realloc*/
 char				**ft_realloc(char **tab, char *string);
@@ -248,11 +247,11 @@ int					check_colour(char **tab_col, t_game *data);
 
 /*Checking Texture*/
 int					check_texture(char **tab_tex, t_game *data);
-int 				texture_copy_info(t_game *data, char *tmp, int i);
+int					texture_copy_info(t_game *data, char *tmp, int i);
 
 /*Checking Texture2*/
-int 				check_texture2(t_game *data, char *name_file, int i);
-void    			clear_texture(t_game *data);
+int					check_texture2(t_game *data, char *name_file, int i);
+void				clear_texture(t_game *data);
 
 /*===================*/
 /*======Parsing======*/
@@ -270,7 +269,8 @@ int					clear_parsing(char **tab_map, char **tab_tex,
 int					check_extension(char *name_map, char *extention);
 
 /*Parsing3*/
-int					manage_data_loop(char ***tab_map, char ***tab_tex, char ***tab_col, char *string);
+int					manage_data_loop(char ***tab_map, char ***tab_tex,
+						char ***tab_col, char *string);
 
 /*===================*/
 /*======PLAYER=======*/
@@ -357,7 +357,8 @@ void				vect_to_mapcoord(t_vector point, t_coord *map_coord);
 /*======================*/
 
 /*Initialise images*/
-bool				init_imgs(t_game *data, t_imgtextures *imgs);
+bool				init_imgs(t_game *data, t_imgtextures *imgs,
+						t_texture *texts);
 
 /*Texture reading*/
 unsigned int		get_img_pixel_col(t_img *img, int x, int y);
@@ -376,11 +377,17 @@ int					loop_event(t_game *data);
 /*Timing*/
 double				add_timer_ms(struct timeval *time_src);
 
-/*=====================*/
-/*=======DESTROY=======*/
-/*=====================*/
+/*=======================*/
+/*=======GAME DATA=======*/
+/*=======================*/
+
+/*initialise game*/
+bool				init_game(t_game *data);
+
+/*Close game window*/
+int					close_game(t_game *data);
 
 /*Free mlx structure*/
-int					kill_game(t_game *data);
+void				kill_game(t_game *data);
 
 #endif

@@ -1,0 +1,4 @@
+./textures/north_frames/NorthWall1.xpm
+./textures/north_frames/NorthWall2.xpm
+./textures/north_frames/NorthWall3.xpm
+./textures/north_frames/NorthWall4.xpm

@@ -13,21 +13,27 @@
 #include "cub3d.h"
 
 static bool	set_imgs(t_game *data, t_img **img, int *frames, char **files);
+static bool	wipeout_imgs(t_game *data, t_img **img, int i);
 
-bool	init_imgs(t_game *data, t_imgtextures *imgs)
+bool	init_imgs(t_game *data, t_imgtextures *imgs, t_texture *texts)
 {
-	char	*northtest[2] = {"./textures/Wall_Nord.xpm", NULL};
-	char	*southtest[2] = {"./textures/Wall_Sud.xpm", NULL};
-	char	*easttest[2] = {"./textures/Wall_Est.xpm", NULL};
-	char	*westtest[2] = {"./textures/Wall_Wouest.xpm", NULL};
-	char	*doortest[5] = {"./textures/Wall_Door.xpm", "./textures/Wall_Nord.xpm",
-							"./textures/Wall_Door.xpm", "./textures/Wall_Sud.xpm", NULL};
+	char	**tx_files;
 
-	set_imgs(data, &(imgs->wall_north), &(imgs->frames_north), northtest);
-	set_imgs(data, &(imgs->wall_south), &(imgs->frames_south), southtest);
-	set_imgs(data, &(imgs->wall_east), &(imgs->frames_east), easttest);
-	set_imgs(data, &(imgs->wall_west), &(imgs->frames_west), westtest);
-	set_imgs(data, &(imgs->wall_door), &(imgs->frames_door), doortest);
+	tx_files = texts->texture_north;
+	if (!set_imgs(data, &(imgs->wall_north), &(imgs->frames_north), tx_files))
+		return (false);
+	tx_files = texts->texture_south;
+	if (!set_imgs(data, &(imgs->wall_south), &(imgs->frames_south), tx_files))
+		return (false);
+	tx_files = texts->texture_east;
+	if (!set_imgs(data, &(imgs->wall_east), &(imgs->frames_east), tx_files))
+		return (false);
+	tx_files = texts->texture_west;
+	if (!set_imgs(data, &(imgs->wall_west), &(imgs->frames_west), tx_files))
+		return (false);
+	tx_files = texts->texture_north;
+	if (!set_imgs(data, &(imgs->wall_door), &(imgs->frames_door), tx_files))
+		return (false);
 	return (true);
 }
 
@@ -48,9 +54,21 @@ static bool	set_imgs(t_game *data, t_img **img, int *frames, char **files)
 		((*img)[i]).img_height = 64;
 		((*img)[i]).sprite = mlx_xpm_file_to_image(data->mlx, files[i],
 				&(((*img)[i]).img_width), &(((*img)[i]).img_height));
-		((*img)[i]).addr = mlx_get_data_addr(((*img)[i]).sprite, &((*img)[i]).bbp,
-				&((*img)[i]).line_len, &((*img)[i]).endian);
+		if (((*img)[i]).sprite == NULL)
+			return (wipeout_imgs(data, img, i));
+		((*img)[i]).addr = mlx_get_data_addr(((*img)[i]).sprite,
+				&((*img)[i]).bbp, &((*img)[i]).line_len, &((*img)[i]).endian);
 		i++;
 	}
 	return (true);
+}
+
+static bool	wipeout_imgs(t_game *data, t_img **img, int i)
+{
+	i -= 1;
+	while (i >= 0)
+		mlx_destroy_image(data->mlx, (*img)[i--].sprite);
+	free(*img);
+	*img = NULL;
+	return (false);
 }

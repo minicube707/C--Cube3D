@@ -31,6 +31,7 @@ FILE_NAMES_GRAPHIC = 	angle_math \
 						draw_basic \
 						draw_minimap \
 						dtrig \
+						init_game \
 						init_imgs \
 						is_raycast_hztl \
 						key_events \

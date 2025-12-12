@@ -62,7 +62,7 @@ static int	manage_data_utils(t_game *data, char *string, int i)
 		return (ft_perror("Probleme allocation dynamique\n"));
 	if (!check_extension(tmp2, ".xpm"))
 	{
-		printf("Error\nWrong extention. Can't open file %s\n", tmp2);
+		printf("Error\nWrong extension. Can't open file %s\n", tmp2);
 		free(tmp2);
 		return (1);
 	}
