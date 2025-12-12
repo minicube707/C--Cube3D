@@ -17,7 +17,8 @@ double	add_timer_ms(struct timeval *time_src)
 	struct timeval	time_cmp;
 	double			time_diff;
 
-	gettimeofday(&time_cmp, NULL);
+	if (gettimeofday(&time_cmp, NULL) == -1)
+		return (0);
 	time_diff = (time_cmp.tv_sec * 1000) + (time_cmp.tv_usec / 1000);
 	time_diff -= (time_src->tv_sec * 1000) + (time_src->tv_usec / 1000);
 	time_src->tv_sec = time_cmp.tv_sec;

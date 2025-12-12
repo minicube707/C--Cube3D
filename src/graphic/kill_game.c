@@ -13,6 +13,7 @@
 #include "cub3d.h"
 
 static void	kill_images(t_game *data, t_img **img, int frames);
+static void	kill_door_state(t_game *data);
 
 int	close_game(t_game *data)
 {
@@ -35,6 +36,7 @@ void	kill_game(t_game *data)
 	kill_images(data, &(data_imgs->wall_east), data_imgs->frames_east);
 	kill_images(data, &(data_imgs->wall_west), data_imgs->frames_west);
 	kill_images(data, &(data_imgs->wall_door), data_imgs->frames_door);
+	kill_door_state(data);
 	if (data->mlx != NULL)
 	{
 		mlx_destroy_display(data->mlx);
@@ -54,4 +56,16 @@ static void	kill_images(t_game *data, t_img **img, int frames)
 	while (i < frames)
 		mlx_destroy_image(data->mlx, (*img)[i++].sprite);
 	free(*img);
+}
+
+static void	kill_door_state(t_game *data)
+{
+	int	i;
+
+	if (data->door_state == NULL)
+		return ;
+	i = 0;
+	while (i < data->map_width && (data->door_state)[i] != NULL)
+		free((data->door_state)[i++]);
+	free(data->door_state);
 }

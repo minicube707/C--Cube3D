@@ -18,10 +18,12 @@ t_img	*render_get_img(t_game *data, t_raydata *ray)
 {
 	t_img	*img_use;
 	int		frame_use;
+	char	map_tile;
 
 	img_use = NULL;
 	frame_use = render_get_anim_index(data, ray);
-	if (vect_get_tile(data, ray->vect) == 'D')
+	map_tile = vect_get_tile(data, ray->vect);
+	if (map_tile == 'D' || map_tile == 'O')
 		img_use = &(data->wall_imgs.wall_door[frame_use]);
 	else if (ray->wall_side == 1)
 		img_use = &(data->wall_imgs.wall_north[frame_use]);
@@ -36,11 +38,13 @@ t_img	*render_get_img(t_game *data, t_raydata *ray)
 
 static int	render_get_anim_index(t_game *data, t_raydata *ray)
 {
-	int	frame_count;
-	int	frame_at;
+	int		frame_count;
+	int		frame_at;
+	char	map_tile;
 
 	frame_count = 0;
-	if (vect_get_tile(data, ray->vect) == 'D')
+	map_tile = vect_get_tile(data, ray->vect);
+	if (map_tile == 'D' || map_tile == 'O')
 		frame_count = data->wall_imgs.frames_door;
 	else if (ray->wall_side == 1)
 		frame_count = data->wall_imgs.frames_north;

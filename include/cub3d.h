@@ -144,6 +144,7 @@ typedef struct s_game
 	char			**map;
 	int				map_width;
 	int				map_height;
+	int				**door_state;
 
 	int				col_ceil;
 	int				col_floor;
@@ -311,6 +312,7 @@ void				draw_minimap(t_game *data);
 /*Raycast rendering*/
 void				render_raycast(t_game *data, t_player player);
 t_img				*render_get_img(t_game *data, t_raydata *ray);
+int					door_img_x_add(t_game *data, t_raydata ray, t_img img);
 
 /*===================*/
 /*===MATHEMATIQUES===*/
@@ -346,6 +348,10 @@ int					raycast(t_game *data, t_vector *ray_vect, double angle,
 bool				is_raycast_hztl(t_game *data, t_vector hztl, t_vector vtcl,
 						bool prec);
 
+/*Ray collison*/
+bool				ray_collision(t_game *data, t_vector ray_vect,
+						bool is_hztl);
+
 /*Collision*/
 bool				vect_in_wall(t_game *data, t_vector point);
 bool				player_in_wall(t_game *data, t_player player);
@@ -376,6 +382,9 @@ int					loop_event(t_game *data);
 
 /*Timing*/
 double				add_timer_ms(struct timeval *time_src);
+
+/*Door*/
+void				door_anim(t_game *data);
 
 /*=======================*/
 /*=======GAME DATA=======*/

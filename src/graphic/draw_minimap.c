@@ -13,6 +13,7 @@
 #include "cub3d.h"
 
 static void	minimap_walls(t_game *data, int unit_len, int map_x, int map_y);
+static int	map_wall_col(char map_c);
 static void	minimap_player(t_game *data, int unit_len, int map_x, int map_y);
 static int	count_empty_rows(t_game *data);
 
@@ -27,10 +28,10 @@ void	draw_minimap(t_game *data)
 		return ;
 	unit = 1;
 	skip_rows = count_empty_rows(data);
-	if ((data->map_width - 1) >= (data->map_height - skip_rows))
+	if ((data->map_width - 1) >= (data->map_height - skip_rows - 1))
 		unit = (W_WIDTH / 5) / (data->map_width - 1);
 	else
-		unit = (W_HEIGHT / 4) / (data->map_height - skip_rows);
+		unit = (W_HEIGHT / 4) / (data->map_height - skip_rows - 1);
 	if (unit < 2)
 		unit = 2;
 	map_x = 20;
@@ -53,18 +54,26 @@ static void	minimap_walls(t_game *data, int unit_len, int map_x, int map_y)
 	while (i < data->map_width - 1)
 	{
 		j = skip_rows;
-		while (j < data->map_height)
+		while (j < data->map_height - 1)
 		{
 			wall_rect.x = map_x + (i * wall_rect.width);
 			wall_rect.y = map_y + ((j - skip_rows) * wall_rect.height);
-			if ((data->map)[i][j] == '1' || (data->map)[i][j] == 'D')
-				draw_rectangle(data, wall_rect, 0x101010);
-			else
-				draw_rectangle(data, wall_rect, 0xDDDDDD);
+			draw_rectangle(data, wall_rect, map_wall_col((data->map)[i][j]));
 			j++;
 		}
 		i++;
 	}
+}
+
+static int	map_wall_col(char map_c)
+{
+	if (map_c == '1')
+		return (0x101010);
+	if (map_c == 'D')
+		return (0x009000);
+	if (map_c == 'O')
+		return (0xB8B8B8);
+	return (0xDDDDDD);
 }
 
 static void	minimap_player(t_game *data, int unit_len, int map_x, int map_y)

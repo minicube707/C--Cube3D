@@ -14,6 +14,7 @@
 
 static bool	set_imgs(t_game *data, t_img **img, int *frames, char **files);
 static bool	wipeout_imgs(t_game *data, t_img **img, int i);
+static void	img_error(char *image_name);
 
 bool	init_imgs(t_game *data, t_imgtextures *imgs, t_texture *texts)
 {
@@ -46,7 +47,7 @@ static bool	set_imgs(t_game *data, t_img **img, int *frames, char **files)
 		*frames += 1;
 	*img = (t_img *) malloc((*frames) * sizeof(t_img));
 	if (*img == NULL)
-		return (false);
+		return (printf("Error\nImage array malloc error\n"), false);
 	i = 0;
 	while (i < *frames)
 	{
@@ -55,7 +56,7 @@ static bool	set_imgs(t_game *data, t_img **img, int *frames, char **files)
 		((*img)[i]).sprite = mlx_xpm_file_to_image(data->mlx, files[i],
 				&(((*img)[i]).img_width), &(((*img)[i]).img_height));
 		if (((*img)[i]).sprite == NULL)
-			return (wipeout_imgs(data, img, i));
+			return (img_error(files[i]), wipeout_imgs(data, img, i));
 		((*img)[i]).addr = mlx_get_data_addr(((*img)[i]).sprite,
 				&((*img)[i]).bbp, &((*img)[i]).line_len, &((*img)[i]).endian);
 		i++;
@@ -71,4 +72,10 @@ static bool	wipeout_imgs(t_game *data, t_img **img, int i)
 	free(*img);
 	*img = NULL;
 	return (false);
+}
+
+static void	img_error(char *img_name)
+{
+	printf("Error\n");
+	printf("Could not open %s\n", img_name);
 }
