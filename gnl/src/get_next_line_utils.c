@@ -11,7 +11,8 @@
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-# include <stdio.h>
+#include <stdio.h>
+
 char	*ft_strncpy(char *dest, const char *src, unsigned int n)
 {
 	unsigned int	i;

@@ -13,33 +13,59 @@
 #include "cub3d.h"
 
 static void	kill_images(t_game *data, t_img **img, int frames);
+static void	kill_door_state(t_game *data);
 
-int	kill_game(t_game *data)
+int	close_game(t_game *data)
+{
+	kill_game(data);
+	exit(0);
+	return (0);
+}
+
+void	kill_game(t_game *data)
 {
 	t_imgtextures	*data_imgs;
 
-	mlx_destroy_window(data->mlx, data->win);
-	mlx_destroy_image(data->mlx, data->img);
+	if (data->win != NULL)
+		mlx_destroy_window(data->mlx, data->win);
+	if (data->img != NULL)
+		mlx_destroy_image(data->mlx, data->img);
 	data_imgs = &(data->wall_imgs);
 	kill_images(data, &(data_imgs->wall_north), data_imgs->frames_north);
 	kill_images(data, &(data_imgs->wall_south), data_imgs->frames_south);
 	kill_images(data, &(data_imgs->wall_east), data_imgs->frames_east);
 	kill_images(data, &(data_imgs->wall_west), data_imgs->frames_west);
 	kill_images(data, &(data_imgs->wall_door), data_imgs->frames_door);
-	mlx_destroy_display(data->mlx);
-	free(data->mlx);
+	kill_door_state(data);
+	if (data->mlx != NULL)
+	{
+		mlx_destroy_display(data->mlx);
+		free(data->mlx);
+	}
 	tab_char_clear(data->map);
 	clear_texture(data);
-	exit(0);
-	return (0);
 }
 
 static void	kill_images(t_game *data, t_img **img, int frames)
 {
 	int	i;
 
+	if (*img == NULL)
+		return ;
 	i = 0;
 	while (i < frames)
 		mlx_destroy_image(data->mlx, (*img)[i++].sprite);
 	free(*img);
+}
+
+static void	kill_door_state(t_game *data)
+{
+	int	i;
+
+	if (data->door_state == NULL)
+		return ;
+	i = 0;
+	while (i < data->map_width && (data->door_state)[i] != NULL)
+		free((data->door_state)[i++]);
+	free(data->door_state);
 }

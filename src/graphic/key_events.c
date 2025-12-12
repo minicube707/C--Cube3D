@@ -52,6 +52,6 @@ int	key_release(int key, t_game *data)
 	if (key == LSHIFT)
 		data->player.key_sprint = false;
 	if (key == ESC)
-		kill_game(data);
+		close_game(data);
 	return (0);
 }

@@ -26,11 +26,13 @@ CFLAGS = -Wall -Wextra -Werror -MMD -MP -g
 FILE_NAMES_GRAPHIC = 	angle_math \
 						add_timer_ms \
 						collision_check \
+						door_anim \
 						door_check \
 						draw_arrow \
 						draw_basic \
 						draw_minimap \
 						dtrig \
+						init_game \
 						init_imgs \
 						is_raycast_hztl \
 						key_events \
@@ -40,6 +42,7 @@ FILE_NAMES_GRAPHIC = 	angle_math \
 						player \
 						player_collision \
 						point_math \
+						ray_collision \
 						raycast \
 						render_get_img \
 						render \

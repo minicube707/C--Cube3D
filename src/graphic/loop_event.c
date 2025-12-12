@@ -23,6 +23,7 @@ int	loop_event(t_game *data)
 		if (data->player.key_space_pressed)
 			door_check(data, &data->player);
 		data->player.key_space_pressed = false;
+		door_anim(data);
 		turn_player(&data->player);
 		move_player(data, &data->player);
 		render_raycast(data, data->player);

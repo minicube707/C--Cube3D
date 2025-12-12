@@ -13,7 +13,7 @@
 #include "cub3d.h"
 
 static void		draw_wall_line(t_game *data, t_raydata *ray, int i);
-static int		get_img_x(t_raydata *ray, t_img *img);
+static int		get_img_x(t_game *data, t_raydata *ray, t_img *img);
 static int		get_img_y(t_raydata *ray, t_img *img);
 static double	fix_dist(double dist, double player_angle, double ray_angle);
 
@@ -52,7 +52,7 @@ static void	draw_wall_line(t_game *data, t_raydata *ray, int i)
 	t_img	*img_use;
 
 	img_use = render_get_img(data, ray);
-	img_x = get_img_x(ray, img_use);
+	img_x = get_img_x(data, ray, img_use);
 	while (ray->start_y < ray->end)
 	{
 		img_y = get_img_y(ray, img_use);
@@ -62,7 +62,7 @@ static void	draw_wall_line(t_game *data, t_raydata *ray, int i)
 	}
 }
 
-static int	get_img_x(t_raydata *ray, t_img *img)
+static int	get_img_x(t_game *data, t_raydata *ray, t_img *img)
 {
 	double	img_x;
 
@@ -76,7 +76,7 @@ static int	get_img_x(t_raydata *ray, t_img *img)
 	if (ray->wall_side == 4)
 		img_x = fmod(ray->vect.y, TILE_LEN);
 	img_x = (img_x / TILE_LEN) * img->img_width;
-	return ((int)img_x);
+	return ((int)img_x + door_img_x_add(data, *ray, *img));
 }
 
 static int	get_img_y(t_raydata *ray, t_img *img)

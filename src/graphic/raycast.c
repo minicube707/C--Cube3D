@@ -54,7 +54,7 @@ static void	raycast_hztl(t_game *data, t_vector *ray_vect, double angle)
 	if (angle > 180)
 		y_offset = -y_offset;
 	x_offset = -(y_offset * a_tan);
-	while (!vect_in_wall(data, *ray_vect))
+	while (!ray_collision(data, *ray_vect, true))
 	{
 		ray_vect->x += x_offset;
 		ray_vect->y += y_offset;
@@ -97,7 +97,7 @@ static void	raycast_vtcl(t_game *data, t_vector *ray_vect, double angle)
 	if (angle > 90 && angle < 270)
 		x_offset = -x_offset;
 	y_offset = -(x_offset * n_tan);
-	while (!vect_in_wall(data, *ray_vect))
+	while (!ray_collision(data, *ray_vect, false))
 	{
 		ray_vect->x += x_offset;
 		ray_vect->y += y_offset;
