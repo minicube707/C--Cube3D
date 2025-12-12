@@ -1,8 +1,8 @@
-./textures/south_frames/SouthWall1.xpm
-./textures/south_frames/SouthWall2.xpm
-./textures/south_frames/SouthWall3.xpm
-./textures/south_frames/SouthWall4.xpm
-./textures/south_frames/SouthWall5.xpm
-./textures/south_frames/SouthWall6.xpm
-./textures/south_frames/SouthWall7.xpm
-./textures/south_frames/SouthWall8.xpm
+SouthWall1.xpm
+SouthWall2.xpm
+SouthWall3.xpm
+SouthWall4.xpm
+SouthWall5.xpm
+SouthWall6.xpm
+SouthWall7.xpm
+SouthWall8.xpm

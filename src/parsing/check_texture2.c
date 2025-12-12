@@ -6,7 +6,7 @@
 /*   By: fmotte <fmotte@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 14:48:29 by fmotte            #+#    #+#             */
-/*   Updated: 2025/12/11 18:10:34 by fmotte           ###   ########.fr       */
+/*   Updated: 2025/12/12 16:57:10 by fmotte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,52 +20,27 @@ void	clear_texture(t_game *data)
 	tab_char_clear(data->texture.texture_west);
 }
 
-int	texture_copy_info(t_game *data, char *tmp, int i)
+static int	manage_data_utils_add_path(t_game *data, char *string, char *path, int i)
 {
-	char	**tmp_tab;
-
-	tmp_tab = NULL;
-	if (i == 0)
-		tmp_tab = data->texture.texture_north;
-	else if (i == 1)
-		tmp_tab = data->texture.texture_south;
-	else if (i == 2)
-		tmp_tab = data->texture.texture_east;
-	else if (i == 3)
-		tmp_tab = data->texture.texture_west;
-	tmp_tab = ft_realloc(tmp_tab, tmp);
-	if (tmp_tab == NULL)
-		return (1);
-	if (i == 0)
-		data->texture.texture_north = tmp_tab;
-	else if (i == 1)
-		data->texture.texture_south = tmp_tab;
-	else if (i == 2)
-		data->texture.texture_east = tmp_tab;
-	else if (i == 3)
-		data->texture.texture_west = tmp_tab;
-	return (0);
-}
-
-static int	manage_data_utils(t_game *data, char *string, int i)
-{
-	char	*tmp;
-	char	*tmp2;
-
-	tmp = skip_white_space(string);
+	char *tmp;
+	char *tmp2;
+	
+	if (path[ft_strlen(path)] != '/' && string[0] != '/')
+	{
+		tmp = ft_strjoin(path, "/");
+		if (tmp == NULL)
+		{
+			free(string);
+			return (ft_perror("Probleme allocation dynamique\n"));
+		}
+		tmp2 = ft_strjoin(tmp, string);
+		free(tmp);
+	}
+	else
+		tmp2 = ft_strjoin(path, string);
 	free(string);
-	if (tmp == NULL)
-		return (ft_perror("Probleme allocation dynamique\n"));
-	tmp2 = ft_substr(tmp, 0, ft_strlen(tmp) - 1);
-	free(tmp);
 	if (tmp2 == NULL)
 		return (ft_perror("Probleme allocation dynamique\n"));
-	if (!check_extension(tmp2, ".xpm"))
-	{
-		printf("Error\nWrong extension. Can't open file %s\n", tmp2);
-		free(tmp2);
-		return (1);
-	}
 	if (texture_copy_info(data, tmp2, i))
 	{
 		free(tmp2);
@@ -74,7 +49,29 @@ static int	manage_data_utils(t_game *data, char *string, int i)
 	return (0);
 }
 
-static int	manage_data(t_game *data, int fd, int i)
+static int	manage_data_utils(t_game *data, char *string, char *path, int i)
+{
+	char	*tmp;
+	char	*img;
+
+	tmp = skip_white_space(string);
+	free(string);
+	if (tmp == NULL)
+		return (ft_perror("Probleme allocation dynamique\n"));
+	img = ft_substr(tmp, 0, ft_strlen(tmp) - 1);
+	free(tmp);
+	if (img == NULL)
+		return (ft_perror("Probleme allocation dynamique\n"));
+	if (!check_extension(img, ".xpm"))
+	{
+		printf("Error\nWrong extention. Can't open file %s\n", img);
+		free(img);
+		return (1);
+	}
+	return (manage_data_utils_add_path(data, img, path, i));
+}
+
+static int	manage_data(t_game *data, int fd, char *path, int i)
 {
 	char	*string;
 
@@ -89,23 +86,27 @@ static int	manage_data(t_game *data, int fd, int i)
 				free(string);
 				continue ;
 			}
-			if (manage_data_utils(data, string, i))
+			if (manage_data_utils(data, string, path, i))
+			{
+				free(path);
 				return (1);
+			}
 		}
 	}
+	free(path);
 	return (0);
 }
 
-int	check_texture2(t_game *data, char *name_file, int i)
+int	check_texture2(t_game *data, char *path_utils, char *path, int i)
 {
 	int	fd;
 	int	res;
 
-	fd = open_map(name_file);
-	free(name_file);
+	fd = open_map(path_utils);
+	free(path_utils);
 	if (fd == -1)
 		return (1);
-	res = manage_data(data, fd, i);
+	res = manage_data(data, fd, path, i);
 	close(fd);
 	if (res)
 		return (1);
