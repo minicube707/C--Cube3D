@@ -6,7 +6,7 @@
 #    By: fmotte <fmotte@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/28 11:37:49 by cpollock          #+#    #+#              #
-#    Updated: 2025/12/12 15:54:00 by fmotte           ###   ########.fr        #
+#    Updated: 2025/12/13 15:28:56 by fmotte           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -96,16 +96,30 @@ MLX_HEAD = $(MLX_PATH)/mlx.h
 
 NAME = cub3d
 
+ANIMATION_SCRIPY = ./animation.sh  # Le script spinner
+
+# =======================================
+#            COLOR
+# =======================================
+RESET       = \033[0m
+BOLD        = \033[1m
+RED         = \033[31m
+GREEN       = \033[32m
+YELLOW      = \033[38;5;227m
+BLUE        = \033[38;5;26m
+MAGENTA    =  \033[35m
+CYAN        = \033[38;5;51m	
 
 # =======================================
 #              COMPILATION
 # =======================================
 $(OBJ_PATH)/%.o: $(SRC_PATH)/graphic/%.c $(HEA_FILES) | $(OBJ_PATH) $(MLX_HEAD)
-	$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
+	@$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
 
 $(OBJ_PATH)/%.o: $(SRC_PATH)/parsing/%.c $(HEA_FILES) | $(OBJ_PATH) $(MLX_HEAD)
-	$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
-	
+	@$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
+
+
 # =======================================
 #              RULES
 # =======================================
@@ -116,28 +130,36 @@ bonus: all
 .PHONY: all clean fclean re bonus
 
 $(OBJ_PATH) :
-	mkdir -p $(OBJ_PATH)
+	@mkdir -p $(OBJ_PATH)
 	
 $(NAME): $(OBJ_FILES) $(MLX_HEAD)
-	@$(MAKE) -s -C gnl
-	$(CC) $(CFLAGS) $(OBJ_FILES) $(ARCHIVE) -Lmlx -lmlx -L/usr/lib -Imlx -lXext -lX11 -lm -lz -o $(NAME)
+	@$(MAKE) -s -C gnl 
+	@stdbuf -o0 $(CC) $(CFLAGS) $(OBJ_FILES) $(ARCHIVE) -Lmlx -lmlx -L/usr/lib -Imlx -lXext -lX11 -lm -lz -o $(NAME) & pid=$!
+	@$(ANIMATION_SCRIPY) $$pid
 
 $(MLX_HEAD):
-	git clone $(MLX_GIT) $(MLX_PATH)
-	make -C $(MLX_PATH)
+	@git clone $(MLX_GIT) $(MLX_PATH)
+	@make -C $(MLX_PATH)
 
 clean:
-	@$(MAKE) -s -C gnl fclean
-	rm -f $(OBJ_FILES) $(DEP_FILES)
-	rm -rf $(OBJ_PATH)
+	@$(MAKE) -s -C gnl clean
+	@echo "\n$(RED)$(NAME_FOLDER): 🧹 Suppression des fichiers objets...$(RESET)"
+	@rm -f $(OBJ_FILES) $(DEP_FILES)
+	@rm -rf $(OBJ_PATH)
+	@echo "$(GREEN)$(NAME_FOLDER): ✅ Fichiers supprimés.$(RESET)"
 
 fclean: clean
-	rm -f $(NAME)
+	@$(MAKE) -s -C gnl fclean
+	@echo "\n$(RED)$(NAME_FOLDER): 🧹 Suppression des archive...$(RESET)"
+	@rm -f $(NAME)
+	@echo "$(GREEN)$(NAME_FOLDER): ✅ Fichiers supprimés.$(RESET)"
 
 re: fclean all
 
 reset: fclean
-	rm -rf $(MLX_PATH)
+	@echo "\n$(RED)$(NAME_FOLDER): 🧹 Suppression de la MLX...$(RESET)"
+	@rm -rf $(MLX_PATH)
+	@echo "$(GREEN)$(NAME_FOLDER): ✅ Fichiers supprimés.$(RESET)"
 
 # Inclusion automatique des fichiers .d s’ils existent
 -include $(DEP_FILES)
