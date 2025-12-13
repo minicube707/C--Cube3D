@@ -77,6 +77,7 @@ static double	get_turn_input(t_game *data, t_player *player)
 	int		mouse_x;
 	int		mouse_y;
 	double	mouse_trn;
+	double	dead_zone;
 
 	if ((player->key_turn_l ^ player->key_turn_r))
 		return (((player->key_turn_r) * 2) - 1);
@@ -84,8 +85,9 @@ static double	get_turn_input(t_game *data, t_player *player)
 	if (mouse_x >= 0 && mouse_x <= W_WIDTH)
 	{
 		mouse_trn = mouse_x - (W_WIDTH / 2);
-		if (fabs(mouse_trn) > 50)
-			return (mouse_trn / (W_WIDTH / 2 - 50));
+		dead_zone = W_WIDTH * 0.05;
+		if (fabs(mouse_trn) > dead_zone)
+			return (mouse_trn / (W_WIDTH / 2 - dead_zone));
 	}
 	return (0);
 }
