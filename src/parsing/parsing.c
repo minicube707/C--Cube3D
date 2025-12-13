@@ -6,7 +6,7 @@
 /*   By: fmotte <fmotte@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 14:58:28 by fmotte            #+#    #+#             */
-/*   Updated: 2025/12/11 18:47:07 by fmotte           ###   ########.fr       */
+/*   Updated: 2025/12/13 14:13:00 by fmotte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static int	manage_data_utils(char **tab_map, char **tab_tex, char **tab_col,
 	clear_parsing(tab_map, tab_tex, tab_col);
 	data->player.pos.x = (double)((coord.x * TILE_LEN) + (TILE_LEN / 2));
 	data->player.pos.y = (double)((coord.y * TILE_LEN) + (TILE_LEN / 2));
-	data->player.direction = (double) get_ori_player(data->map) * 90;
+	data->player.direction = (double)get_ori_player(data->map) * 90;
 	return (0);
 }
 

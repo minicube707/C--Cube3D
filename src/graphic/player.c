@@ -6,7 +6,7 @@
 /*   By: fmotte <fmotte@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 12:57:20 by cpollock          #+#    #+#             */
-/*   Updated: 2025/12/09 15:48:09 by fmotte           ###   ########.fr       */
+/*   Updated: 2025/12/13 15:54:17 by fmotte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,7 @@ void	move_player(t_game *data, t_player *player)
 			if (spd < 0)
 				angle_add = -angle_add;
 		}
-		move_collision(data, player,
-			dcos(player->direction - angle_add) * spd,
+		move_collision(data, player, dcos(player->direction - angle_add) * spd,
 			dsin(player->direction - angle_add) * spd);
 	}
 }
@@ -82,7 +81,8 @@ static double	get_turn_input(t_game *data, t_player *player)
 	if ((player->key_turn_l ^ player->key_turn_r))
 		return (((player->key_turn_r) * 2) - 1);
 	mlx_mouse_get_pos(data->mlx, data->win, &mouse_x, &mouse_y);
-	if (mouse_x >= 0 && mouse_x <= W_WIDTH)
+	if (mouse_x >= 0 && mouse_x <= W_WIDTH && mouse_y >= 0
+		&& mouse_y <= W_HEIGHT)
 	{
 		mouse_trn = mouse_x - (W_WIDTH / 2);
 		dead_zone = W_WIDTH * 0.05;

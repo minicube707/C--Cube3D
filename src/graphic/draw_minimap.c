@@ -6,7 +6,7 @@
 /*   By: fmotte <fmotte@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/05 12:36:23 by cpollock          #+#    #+#             */
-/*   Updated: 2025/12/09 13:03:36 by fmotte           ###   ########.fr       */
+/*   Updated: 2025/12/13 14:12:37 by fmotte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ static int	count_empty_rows(t_game *data);
 
 void	draw_minimap(t_game *data)
 {
-	int			unit;
-	int			map_x;
-	int			map_y;
-	int			skip_rows;
+	int	unit;
+	int	map_x;
+	int	map_y;
+	int	skip_rows;
 
 	if (!data->minimap)
 		return ;
@@ -58,7 +58,9 @@ static void	minimap_walls(t_game *data, int unit_len, int map_x, int map_y)
 		{
 			wall_rect.x = map_x + (i * wall_rect.width);
 			wall_rect.y = map_y + ((j - skip_rows) * wall_rect.height);
-			draw_rectangle(data, wall_rect, map_wall_col((data->map)[i][j]));
+			if ((data->map)[i][j] != ' ')
+				draw_rectangle(data, wall_rect,
+					map_wall_col((data->map)[i][j]));
 			j++;
 		}
 		i++;
@@ -78,8 +80,8 @@ static int	map_wall_col(char map_c)
 
 static void	minimap_player(t_game *data, int unit_len, int map_x, int map_y)
 {
-	t_arrow		player_arrow;
-	double		player_map_width;
+	t_arrow	player_arrow;
+	double	player_map_width;
 
 	player_map_width = unit_len * (data->player.box_width / TILE_LEN);
 	player_arrow.width = player_map_width * 1.5;

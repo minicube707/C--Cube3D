@@ -6,7 +6,7 @@
 /*   By: fmotte <fmotte@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 13:37:24 by fmotte            #+#    #+#             */
-/*   Updated: 2025/12/11 18:18:50 by fmotte           ###   ########.fr       */
+/*   Updated: 2025/12/13 13:06:20 by fmotte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static int	ft_transpose_loop(char ***new_tab, char **tab_map, int height,
 		if (ft_strlen(tab_map[j]) > i && tab_map[j][i] != '\n')
 			(*new_tab)[i][j] = tab_map[j][i];
 		else
-			(*new_tab)[i][j] = '0';
+			(*new_tab)[i][j] = ' ';
 		j++;
 	}
 	(*new_tab)[i][j] = '\0';

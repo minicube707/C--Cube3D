@@ -6,7 +6,7 @@
 /*   By: fmotte <fmotte@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/05 13:06:37 by fmotte            #+#    #+#             */
-/*   Updated: 2025/12/11 18:12:17 by fmotte           ###   ########.fr       */
+/*   Updated: 2025/12/13 14:46:11 by fmotte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,22 @@ static int	check_colour_rgb(char *string)
 	return (-1);
 }
 
+static int	check_colour_parsing(char **tab_split)
+{
+	if (lenght_tab(tab_split) != 4)
+	{
+		tab_char_clear(tab_split);
+		return (1);
+	}
+	if (!ft_isnum((tab_split[0] + 1)) || !ft_isnum((tab_split[1]))
+		|| !ft_isnum((tab_split[2])))
+	{
+		tab_char_clear(tab_split);
+		return (1);
+	}
+	return (0);
+}
+
 static int	extract_colour(t_game *data, char **tab_col, int index, char where)
 {
 	char	**tab_split;
@@ -37,12 +53,8 @@ static int	extract_colour(t_game *data, char **tab_col, int index, char where)
 	tab_split = ft_split(tab_col[index], ',');
 	if (tab_split == NULL)
 		return (1);
-	if (!ft_isnum((tab_split[0] + 1)) || !ft_isnum((tab_split[1]))
-		|| !ft_isnum((tab_split[2])))
-	{
-		tab_char_clear(tab_split);
+	if (check_colour_parsing(tab_split))
 		return (1);
-	}
 	r = check_colour_rgb(tab_split[0] + 1);
 	g = check_colour_rgb(tab_split[1]);
 	b = check_colour_rgb(tab_split[2]);

@@ -6,7 +6,7 @@
 /*   By: fmotte <fmotte@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/05 16:30:59 by fmotte            #+#    #+#             */
-/*   Updated: 2025/12/12 17:36:52 by fmotte           ###   ########.fr       */
+/*   Updated: 2025/12/13 14:09:23 by fmotte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,8 @@ static int	check_texture_path(t_game *data, char *string, int i)
 		return (ft_perror("Probleme allocation dynamique\n"));
 	if (check_extension(path, ".xpm"))
 	{
-		if (texture_copy_info(data, path, i))
-			return (ft_perror("Probleme allocation dynamique\n"));
+		if (texture_copy_info(data, path, i, 1))
+			return (1);
 		return (0);
 	}
 	return (check_texture_path_utils(data, path, i));

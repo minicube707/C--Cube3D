@@ -6,7 +6,7 @@
 /*   By: fmotte <fmotte@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/12 15:52:29 by fmotte            #+#    #+#             */
-/*   Updated: 2025/12/12 17:19:01 by fmotte           ###   ########.fr       */
+/*   Updated: 2025/12/13 14:10:32 by fmotte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int	texture_copy_info_utils(t_game *data, char **tmp_tab, int i)
 	return (0);
 }
 
-int	texture_copy_info(t_game *data, char *tmp, int i)
+int	texture_copy_info(t_game *data, char *tmp, int i, int mode_single)
 {
 	char	**tmp_tab;
 
@@ -44,11 +44,16 @@ int	texture_copy_info(t_game *data, char *tmp, int i)
 		tmp_tab = data->texture.texture_west;
 	else if (i == 4)
 		tmp_tab = data->texture.texture_door;
+	if (tmp_tab != NULL && mode_single)
+	{
+		free(tmp);
+		return (ft_perror("Texture duplicate\n"));
+	}
 	tmp_tab = ft_realloc(tmp_tab, tmp);
 	if (tmp_tab == NULL)
 	{
 		free(tmp);
-		return (1);
+		return (ft_perror("Probleme allocation dynamique\n"));
 	}
 	return (texture_copy_info_utils(data, tmp_tab, i));
 }

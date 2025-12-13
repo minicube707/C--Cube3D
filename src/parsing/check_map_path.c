@@ -6,7 +6,7 @@
 /*   By: fmotte <fmotte@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 14:01:12 by fmotte            #+#    #+#             */
-/*   Updated: 2025/12/11 18:11:37 by fmotte           ###   ########.fr       */
+/*   Updated: 2025/12/13 14:29:16 by fmotte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,16 +121,16 @@ int	check_map_path(char **tab_map)
 		return (1);
 	while (!is_empty_stack(stack_path))
 	{
-		while (!is_empty_stack(stack_path))
-		{
-			if (chech_path_x(stack_wall, &stack_path, &stack_save, max_limit.x))
-				return (1);
-			if (chech_path_y(stack_wall, &stack_path, &stack_save, max_limit.y))
-				return (1);
-			node = stack_path->coord;
-			stack_path = pop_stack(stack_path);
-			free(node);
-		}
+		if (chech_path_x(stack_wall, &stack_path, &stack_save, max_limit.x))
+			return (1);
+		if (chech_path_y(stack_wall, &stack_path, &stack_save, max_limit.y))
+			return (1);
+		node = stack_path->coord;
+		if (node->x < ft_strlen(tab_map[node->y])
+			&& tab_map[node->y][node->x] == ' ')
+			tab_map[node->y][node->x] = '0';
+		stack_path = pop_stack(stack_path);
+		free(node);
 	}
 	clear_map(stack_wall, NULL, &stack_save);
 	return (0);

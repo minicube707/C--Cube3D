@@ -6,7 +6,7 @@
 /*   By: fmotte <fmotte@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 14:48:29 by fmotte            #+#    #+#             */
-/*   Updated: 2025/12/12 17:36:59 by fmotte           ###   ########.fr       */
+/*   Updated: 2025/12/13 14:09:19 by fmotte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ static int	manage_data_utils_add_path(t_game *data, char *string, char *path,
 	free(string);
 	if (tmp2 == NULL)
 		return (ft_perror("Probleme allocation dynamique\n"));
-	if (texture_copy_info(data, tmp2, i))
-		return (ft_perror("Probleme allocation dynamique\n"));
+	if (texture_copy_info(data, tmp2, i, 0))
+		return (1);
 	return (0);
 }
 
