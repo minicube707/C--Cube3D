@@ -284,7 +284,7 @@ int					manage_data_loop(char ***tab_map, char ***tab_tex,
 /*Player*/
 void				init_player(t_player *player);
 void				move_player(t_game *data, t_player *player);
-void				turn_player(t_player *player);
+void				turn_player(t_game *data, t_player *player);
 
 /*Door check*/
 void				door_check(t_game *data, t_player *player);

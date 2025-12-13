@@ -1,0 +1,3 @@
+WallWest1.xpm
+WallWest2.xpm
+WallWest3.xpm

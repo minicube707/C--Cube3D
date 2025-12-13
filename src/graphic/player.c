@@ -12,6 +12,8 @@
 
 #include "cub3d.h"
 
+static double	get_turn_input(t_game *data, t_player *player);
+
 void	init_player(t_player *player)
 {
 	player->fov = 60;
@@ -57,15 +59,33 @@ void	move_player(t_game *data, t_player *player)
 	}
 }
 
-void	turn_player(t_player *player)
+void	turn_player(t_game *data, t_player *player)
 {
 	double	trn;
+	double	trn_input;
 
-	if ((player->key_turn_l ^ player->key_turn_r))
+	trn_input = get_turn_input(data, player);
+	if (trn_input != 0)
 	{
-		trn = player->turn_spd;
-		if (player->key_turn_l)
-			trn = -trn;
+		trn = (player->turn_spd) * trn_input;
 		player->direction = angle_limit(player->direction + trn);
 	}
+}
+
+static double	get_turn_input(t_game *data, t_player *player)
+{
+	int		mouse_x;
+	int		mouse_y;
+	double	mouse_trn;
+
+	if ((player->key_turn_l ^ player->key_turn_r))
+		return (((player->key_turn_r) * 2) - 1);
+	mlx_mouse_get_pos(data->mlx, data->win, &mouse_x, &mouse_y);
+	if (mouse_x >= 0 && mouse_x <= W_WIDTH)
+	{
+		mouse_trn = mouse_x - (W_WIDTH / 2);
+		if (fabs(mouse_trn) > 50)
+			return (mouse_trn / (W_WIDTH / 2 - 50));
+	}
+	return (0);
 }

@@ -1,11 +1,11 @@
 NO textures/north_frames
 SO textures/south_frames
-WE textures/west.xpm
-EA textures/east.xpm
-DO sprite/door/door.xpm
+WE textures/west_frames
+EA textures/east_frames
+DO textures/door_frames
 
-F 58,42,  31
-C 29, 21, 16
+F 5,40,  75
+C 120, 180, 146
 
 11111111111111111111111
 1D000000000S0000000000D1

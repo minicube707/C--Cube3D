@@ -32,7 +32,8 @@ bool	init_imgs(t_game *data, t_imgtextures *imgs, t_texture *texts)
 	tx_files = texts->texture_west;
 	if (!set_imgs(data, &(imgs->wall_west), &(imgs->frames_west), tx_files))
 		return (false);
-	tx_files = texts->texture_north;
+	if (texts->texture_door != NULL)
+		tx_files = texts->texture_door;
 	if (!set_imgs(data, &(imgs->wall_door), &(imgs->frames_door), tx_files))
 		return (false);
 	return (true);
@@ -43,8 +44,10 @@ static bool	set_imgs(t_game *data, t_img **img, int *frames, char **files)
 	int	i;
 
 	*frames = 0;
-	while (files[*frames] != NULL)
+	while (files != NULL && files[*frames] != NULL)
 		*frames += 1;
+	if (*frames == 0)
+		return (printf("Error\nMissing texture files\n"), false);
 	*img = (t_img *) malloc((*frames) * sizeof(t_img));
 	if (*img == NULL)
 		return (printf("Error\nImage array malloc error\n"), false);

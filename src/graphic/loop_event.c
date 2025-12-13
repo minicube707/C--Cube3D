@@ -24,7 +24,7 @@ int	loop_event(t_game *data)
 			door_check(data, &data->player);
 		data->player.key_space_pressed = false;
 		door_anim(data);
-		turn_player(&data->player);
+		turn_player(data, &data->player);
 		move_player(data, &data->player);
 		render_raycast(data, data->player);
 		draw_minimap(data);

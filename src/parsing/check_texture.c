@@ -36,8 +36,8 @@ static int	check_texture_path_utils(t_game *data, char *path, int i)
 	fd = open(path_utils, O_RDONLY);
 	if (fd == -1)
 	{
-		printf("Error\nWrong extention. Can't open file %s\n", path_utils);
-		ft_perror("404 /utils.txt file not found");
+		printf("Error\nWrong extension. Can't open file %s\n", path_utils);
+		ft_perror("404 /utils.txt file not found\n");
 		free(path_utils);
 		free(path);
 		return (1);
