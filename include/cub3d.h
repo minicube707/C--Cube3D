@@ -6,7 +6,7 @@
 /*   By: fmotte <fmotte@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 10:51:40 by cpollock          #+#    #+#             */
-/*   Updated: 2025/12/12 17:38:45 by fmotte           ###   ########.fr       */
+/*   Updated: 2025/12/13 14:12:21 by fmotte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -204,6 +204,7 @@ size_t				ft_strlcat(char *dst, const char *src, size_t size);
 
 /*Mini_Libf3*/
 int					ft_is_visible(char *string);
+void				ft_substitute(char *string, int target, int new);
 
 /*Ft_Realloc*/
 char				**ft_realloc(char **tab, char *string);
@@ -256,7 +257,8 @@ int					check_texture2(t_game *data, char *name_file, char *path,
 void				clear_texture(t_game *data);
 
 /*Checking Texture3*/
-int					texture_copy_info(t_game *data, char *tmp, int i);
+int					texture_copy_info(t_game *data, char *tmp, int i,
+						int mode_single);
 
 /*===================*/
 /*======Parsing======*/
