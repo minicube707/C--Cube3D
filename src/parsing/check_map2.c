@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fmotte <fmotte@student.42.fr>              +#+  +:+       +#+        */
+/*   By: florent <florent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 14:43:04 by fmotte            #+#    #+#             */
-/*   Updated: 2025/12/09 15:44:09 by fmotte           ###   ########.fr       */
+/*   Updated: 2026/01/06 00:33:05 by florent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,8 @@ int	get_ori_player(char **tab_map)
 {
 	int		i;
 	int		j;
-	t_coord	coord;
 
 	i = 0;
-	coord.x = 0;
-	coord.y = 0;
 	while (tab_map[i] != NULL)
 	{
 		j = 0;
