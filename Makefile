@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: fmotte <fmotte@student.42.fr>              +#+  +:+       +#+         #
+#    By: florent <florent@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/28 11:37:49 by cpollock          #+#    #+#              #
-#    Updated: 2025/12/13 15:28:56 by fmotte           ###   ########.fr        #
+#    Updated: 2026/01/19 04:31:15 by florent          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -138,28 +138,28 @@ $(NAME): $(OBJ_FILES) $(MLX_HEAD)
 	@$(ANIMATION_SCRIPY) $$pid
 
 $(MLX_HEAD):
-	@git clone $(MLX_GIT) $(MLX_PATH)
-	@make -C $(MLX_PATH)
+	@git clone --quiet $(MLX_GIT) $(MLX_PATH) 	>/dev/null
+	@make -C $(MLX_PATH) 				>/dev/null 2>&1
 
 clean:
 	@$(MAKE) -s -C gnl clean
-	@echo "\n$(RED)$(NAME_FOLDER): 🧹 Suppression des fichiers objets...$(RESET)"
+	@echo "\n$(RED)$(NAME): 🧹 Suppression des fichiers objets...$(RESET)"
 	@rm -f $(OBJ_FILES) $(DEP_FILES)
 	@rm -rf $(OBJ_PATH)
-	@echo "$(GREEN)$(NAME_FOLDER): ✅ Fichiers supprimés.$(RESET)"
+	@echo "$(GREEN)$(NAME): ✅ Fichiers supprimés.$(RESET)"
 
 fclean: clean
 	@$(MAKE) -s -C gnl fclean
-	@echo "\n$(RED)$(NAME_FOLDER): 🧹 Suppression des archive...$(RESET)"
+	@echo "\n$(RED)$(NAME): 🧹 Suppression des archive...$(RESET)"
 	@rm -f $(NAME)
-	@echo "$(GREEN)$(NAME_FOLDER): ✅ Fichiers supprimés.$(RESET)"
+	@echo "$(GREEN)$(NAME): ✅ Fichiers supprimés.$(RESET)"
 
 re: fclean all
 
 reset: fclean
-	@echo "\n$(RED)$(NAME_FOLDER): 🧹 Suppression de la MLX...$(RESET)"
+	@echo "\n$(RED)$(NAME): 🧹 Suppression de la MLX...$(RESET)"
 	@rm -rf $(MLX_PATH)
-	@echo "$(GREEN)$(NAME_FOLDER): ✅ Fichiers supprimés.$(RESET)"
+	@echo "$(GREEN)$(NAME): ✅ Fichiers supprimés.$(RESET)"
 
 # Inclusion automatique des fichiers .d s’ils existent
 -include $(DEP_FILES)
