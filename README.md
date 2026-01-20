@@ -27,6 +27,8 @@ Lauch
 The program loads the map from the provided path.
 A map is considered valid if the player cannot escape outside the map.
 
+![Matrix](Screenshot/Matrix.png)
+
 ### Bonus – Textures & Animations
 - If the wall texture paths (NO, SO, EA, WE) are not expanded (.xpm), they are treated as paths to a folder.
 - This folder must contain a file named utils.txt.
@@ -41,6 +43,8 @@ To test animated textures, you can run:
 ```base
 maps/good/bonus_triangle.cub
 ```
+
+![Bonus_triangle](Screenshot/Bonus_triangle.png)
 
 ### Mandatory Controls
 Movement:  
